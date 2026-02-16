@@ -5,8 +5,46 @@
 }
 
 body {
-    background-image: none;
-    background-color: aquamarine;
+    background-color: rgb(243, 255, 252);
     height: 100vh;
     width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* main section */
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.playground{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 5px solid rgb(19, 235, 30);
+    margin: 20px;
+}
+#rock{
+background-image: url("../image/rock.jpeg");
+    background-size: cover;
+}
+#paper{
+    background-image: url("../image/paper.jpeg");
+    background-size: cover;
+}
+#scissors{
+    background-image: url("../image/scissors.jpeg");
+    background-size: cover;
 }
