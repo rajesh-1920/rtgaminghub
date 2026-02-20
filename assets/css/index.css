@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    width: 100wh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: azure;
+}
+
+a{
+    height: 60%;
+    width: 30%;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#tic-tac-toe{
+    background-image: url("../image/tic-tac-toe.webp");
+    background-size: cover;
+    background-position: center;
+}
+#rock-paper-scissors{
+    background-image: url("../image/rock-paper-secissors.webp");
+    background-size: cover;
+    background-position: center;
+}
