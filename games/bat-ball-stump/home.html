@@ -1,34 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bat Ball Stump is a polished childhood game with a modern interface, score tracking, and fast rounds."
+    />
+    <title>Bat Ball Stump | RTGamingHub</title>
     <link rel="stylesheet" href="./assets/css/home.css" />
-    <title>bat-ball-stamp</title>
   </head>
   <body>
-    <!-- header section start -->
-    <header>header</header>
-    <!-- main section start -->
-    <main>
-      <p class="welcome-container">Welcome to the Bat-Ball-Stump game.</p>
-      <div class="icon-container">
-        <button id="bat-icon" class="icon-button">
-          <img src="./assets/images/bat.png" alt="bat-icon" />
-        </button>
-        <button id="ball-icon" class="icon-button">
-          <img src="./assets/images/ball.png" alt="ball-icon" />
-        </button>
-        <button id="stamp-icon" class="icon-button">
-          <img src="./assets/images/stump.png" alt="stump-icon" />
-        </button>
-      </div>
-      <div class="message-container">Select an item.</div>
-      <div class="result-container">Score</div>
-      <button class="reset-button">Reset</button>
+    <main class="page-shell compact">
+      <header class="topbar">
+        <a class="back" href="../../index.html">← Games</a>
+        <div class="title">Bat Ball Stump</div>
+        <button id="play-again-btn" class="button button-primary small">Round</button>
+      </header>
+
+      <section class="center-grid">
+        <div class="page-header">
+          <div class="title-wrap">
+            <div class="title">Bat Ball Stump</div>
+            <div class="subtitle">Fast rounds • Friendly UI • Persistent scores</div>
+          </div>
+        </div>
+        <div class="scoreboard">
+          <div class="score-item">
+            <div class="label">You</div>
+            <div id="player-score" class="value">0</div>
+          </div>
+          <div class="score-item">
+            <div class="label">Draws</div>
+            <div id="draw-score" class="value">0</div>
+          </div>
+          <div class="score-item">
+            <div class="label">Computer</div>
+            <div id="computer-score" class="value">0</div>
+          </div>
+        </div>
+
+        <div class="choices" role="group" aria-label="Choose your move">
+          <button class="choice choice-bat" data-choice="bat" aria-pressed="false">
+            <div class="emoji" aria-hidden="true">🏏</div>
+            <div class="name">Bat</div>
+          </button>
+          <button class="choice choice-ball" data-choice="ball" aria-pressed="false">
+            <div class="emoji" aria-hidden="true">🏐</div>
+            <div class="name">Ball</div>
+          </button>
+          <button class="choice choice-stump" data-choice="stump" aria-pressed="false">
+            <div class="emoji" aria-hidden="true">🪵</div>
+            <div class="name">Stump</div>
+          </button>
+        </div>
+
+        <div class="status-row">
+          <div id="status-text" class="status">Choose a move to start</div>
+          <div class="picks"><span id="player-pick">You: -</span> <span id="computer-pick">Computer: -</span></div>
+          <div id="streak-text" class="streak-text">Win consecutive rounds to build momentum.</div>
+        </div>
+
+        <div class="controls">
+          <button id="reset-score-btn" class="button button-secondary small">Reset</button>
+          <div class="meta">Round <span id="round-count">1</span> • Best <span id="best-streak">0</span></div>
+        </div>
+
+        <div class="rules-row" aria-hidden="false">
+          <div class="rule-pill"><span class="emoji">🏏</span> Bat beats Stump</div>
+          <div class="rule-pill"><span class="emoji">🪵</span> Stump beats Ball</div>
+          <div class="rule-pill"><span class="emoji">🏐</span> Ball beats Bat</div>
+        </div>
+
+        <div class="extra-row">
+          <section class="panel history-panel" aria-labelledby="history-title">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <span class="panel-label">Recent</span>
+                <h3 id="history-title">Recent Rounds</h3>
+              </div>
+              <div>
+                <button id="clear-history-btn" class="button button-secondary small">Clear</button>
+              </div>
+            </div>
+
+            <ul id="recent-rounds" class="history-list" aria-live="polite"></ul>
+          </section>
+
+          <aside class="panel info-panel">
+            <span class="panel-label">About</span>
+            <h3>Quick tips</h3>
+            <p class="muted">Keep an eye on streaks; winning consecutive rounds raises your best streak. Use the "Round" button to skip forward.</p>
+            <div class="meta-list">
+              <div>• Single-screen design — no page scroll</div>
+              <div>• Scores persist in your browser</div>
+              <div>• Emojis used for lightweight visuals</div>
+            </div>
+          </aside>
+        </div>
+
+        <footer class="page-footer">
+          <div class="footer-left">RTGamingHub • Bat Ball Stump</div>
+          <div class="footer-right">Made with ❤️ — Play responsibly</div>
+        </footer>
+      </section>
     </main>
-    <!-- footer section start -->
-    <footer>footer</footer>
+
     <script src="./assets/js/home.js"></script>
   </body>
 </html>
