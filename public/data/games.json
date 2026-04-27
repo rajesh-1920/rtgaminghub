@@ -1,0 +1,37 @@
+{
+  "games": [
+    {
+      "id": "tic-tac-toe",
+      "name": "Tic Tac Toe",
+      "description": "The classic 3x3 grid game. Be the first to get three in a row!",
+      "path": "./games/tic-tac-toe/home.html",
+      "icon": "🎯",
+      "category": "strategy",
+      "players": "2",
+      "difficulty": "Easy",
+      "image": "/public/images/tic-tac-toe.webp"
+    },
+    {
+      "id": "rock-paper-scissors",
+      "name": "Rock Paper Scissors",
+      "description": "Play the timeless game against the computer. Test your luck and strategy!",
+      "path": "./games/rock-paper-scissors/home.html",
+      "icon": "✋",
+      "category": "chance",
+      "players": "1",
+      "difficulty": "Easy",
+      "image": "/public/images/rock-paper-scissors.webp"
+    },
+    {
+      "id": "bat-ball-stump",
+      "name": "Bat Ball Stump",
+      "description": "A fun cricket-inspired game. Hit the ball and avoid the stumps!",
+      "path": "./games/bat-ball-stump/home.html",
+      "icon": "🏏",
+      "category": "action",
+      "players": "1",
+      "difficulty": "Medium",
+      "image": "/public/images/bat-ball-stump.webp"
+    }
+  ]
+}
