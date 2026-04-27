@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		computerPick: document.getElementById("computer-pick"),
 		playAgainBtn: document.getElementById("play-again-btn"),
 		resetScoreBtn: document.getElementById("reset-score-btn"),
-		playPanel: document.querySelector(".play-panel") || document.querySelector('.center-grid'),
-		choiceCards: Array.from(document.querySelectorAll(".choice, .choice-card")),
+		playPanel: document.querySelector(".center-grid"),
+		choiceCards: Array.from(document.querySelectorAll(".choice")),
 		recentList: document.getElementById('recent-rounds'),
 		clearHistoryBtn: document.getElementById('clear-history-btn'),
 	};
