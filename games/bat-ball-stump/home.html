@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,7 +20,7 @@
 
       <section class="center-grid">
         <div class="page-header">
-           <div class="subtitle">Fast rounds • Friendly UI • Persistent scores</div>
+          <div class="subtitle">Fast rounds • Friendly UI • Persistent scores</div>
         </div>
         <div class="scoreboard">
           <div class="score-item">
@@ -54,16 +54,20 @@
 
         <div class="status-row">
           <div id="status-text" class="status">Choose a move to start</div>
-          <div class="picks"><span id="player-pick">You: -</span> <span id="computer-pick">Computer: -</span></div>
+          <div class="picks">
+            <span id="player-pick">You: -</span> <span id="computer-pick">Computer: -</span>
+          </div>
           <div id="streak-text" class="streak-text">Win consecutive rounds to build momentum.</div>
         </div>
 
         <div class="controls">
           <button id="reset-score-btn" class="button button-secondary small">Reset</button>
-          <div class="meta">Round <span id="round-count">1</span> • Best <span id="best-streak">0</span></div>
+          <div class="meta">
+            Round <span id="round-count">1</span> • Best <span id="best-streak">0</span>
+          </div>
         </div>
 
-        <div class="rules-row" >
+        <div class="rules-row">
           <div class="rule-pill"><span class="emoji">🏏</span> Bat beats Stump</div>
           <div class="rule-pill"><span class="emoji">🪵</span> Stump beats Ball</div>
           <div class="rule-pill"><span class="emoji">🏐</span> Ball beats Bat</div>
@@ -87,7 +91,10 @@
           <aside class="panel info-panel">
             <span class="panel-label">About</span>
             <h3>Quick tips</h3>
-            <p class="muted">Keep an eye on streaks; winning consecutive rounds raises your best streak. Use the "Round" button to skip forward.</p>
+            <p class="muted">
+              Keep an eye on streaks; winning consecutive rounds raises your best streak. Use the
+              "Round" button to skip forward.
+            </p>
             <div class="meta-list">
               <div>• Single-screen design — no page scroll</div>
               <div>• Scores persist in your browser</div>

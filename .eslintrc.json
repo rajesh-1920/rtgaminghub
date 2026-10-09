@@ -1,5 +1,5 @@
 {
-  "env": { "browser": true, "es2021": true },
+  "env": { "browser": true, "es2021": true, "node": true },
   "extends": ["eslint:recommended"],
   "parserOptions": { "ecmaVersion": 2021, "sourceType": "script" },
   "rules": {
@@ -11,6 +11,19 @@
     {
       "files": ["src/js/utils/helpers.js"],
       "parserOptions": { "sourceType": "module" }
+    },
+    {
+      "files": ["scripts/*.mjs"],
+      "parserOptions": { "sourceType": "module", "ecmaVersion": 2022 }
+    },
+    {
+      "files": ["sw.js"],
+      "env": { "serviceworker": true, "browser": true }
+    },
+    {
+      "files": ["tailwind.config.js"],
+      "env": { "node": true },
+      "parserOptions": { "sourceType": "commonjs" }
     }
   ]
 }

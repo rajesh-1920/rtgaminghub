@@ -22,6 +22,7 @@ Main project configuration file.
 ```
 
 **Usage:**
+
 ```bash
 npm run dev          # Start development server
 npm run build:css    # Build CSS once
@@ -36,24 +37,21 @@ Tailwind CSS configuration and customization.
 
 ```javascript
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx}",
-    "./games/**/*.{html,js}"
-  ],
+  content: ['./index.html', './src/**/*.{js,jsx}', './games/**/*.{html,js}'],
   theme: {
     extend: {
       colors: {
         primary: '#3b82f6',
         secondary: '#8b5cf6',
         accent: '#ec4899',
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 ```
 
 **Key Sections:**
+
 - **content**: Files to scan for Tailwind classes
 - **theme**: Customization of colors, fonts, sizes, etc.
 - **plugins**: Add Tailwind plugins
@@ -65,9 +63,10 @@ module.exports = {
 Input file for Tailwind CSS preprocessing.
 
 Contains Tailwind directives that get compiled to `main.css`:
-- `@tailwind base`    - Reset and default styles
+
+- `@tailwind base` - Reset and default styles
 - `@tailwind components` - Component classes
-- `@tailwind utilities`  - Utility classes
+- `@tailwind utilities` - Utility classes
 
 ---
 
@@ -113,16 +112,16 @@ build/
 
 ## 📁 File Locations Reference
 
-| File | Purpose | Location |
-|------|---------|----------|
-| Landing Page | Main entry point | `index.html` |
-| Project Config | NPM scripts | `package.json` |
-| Tailwind Config | CSS customization | `tailwind.config.js` |
-| Global CSS | Tailwind input | `src/css/input.css` |
-| CSS Output | Generated CSS | `src/css/main.css` |
-| Main JS | App logic | `src/js/main.js` |
-| Utilities | Helper functions | `src/js/utils/helpers.js` |
-| Games List | Game metadata | `public/data/games.json` |
+| File            | Purpose           | Location                  |
+| --------------- | ----------------- | ------------------------- |
+| Landing Page    | Main entry point  | `index.html`              |
+| Project Config  | NPM scripts       | `package.json`            |
+| Tailwind Config | CSS customization | `tailwind.config.js`      |
+| Global CSS      | Tailwind input    | `src/css/input.css`       |
+| CSS Output      | Generated CSS     | `src/css/main.css`        |
+| Main JS         | App logic         | `src/js/main.js`          |
+| Utilities       | Helper functions  | `src/js/utils/helpers.js` |
+| Games List      | Game metadata     | `public/data/games.json`  |
 
 ---
 
@@ -131,6 +130,7 @@ build/
 ### Add New Color
 
 In `tailwind.config.js`:
+
 ```javascript
 colors: {
   primary: '#3b82f6',
@@ -143,6 +143,7 @@ Then use: `<div class="bg-myColor">...</div>`
 ### Add New Font
 
 In `tailwind.config.js`:
+
 ```javascript
 fontFamily: {
   sans: ['Inter', 'system-ui'],
@@ -154,6 +155,7 @@ fontFamily: {
 ### Add Screen Size
 
 In `tailwind.config.js`:
+
 ```javascript
 screens: {
   'sm': '640px',
@@ -170,12 +172,14 @@ Then use: `<div class="huge:text-2xl">...</div>`
 ## 📊 Build Process
 
 ### Development
+
 ```
 Local Files → Tailwind CDN → Browser
 (No build needed)
 ```
 
 ### Production
+
 ```
 Source CSS (input.css)
         ↓
@@ -187,6 +191,7 @@ Minify & Deploy
 ```
 
 Command:
+
 ```bash
 npm run build:css
 ```
@@ -196,10 +201,12 @@ npm run build:css
 ## 🚀 Environment Setup
 
 ### Required
+
 - Modern browser
 - Text editor
 
 ### Optional
+
 - Node.js (for build process)
 - npm (for dependencies)
 
@@ -218,12 +225,15 @@ nvm install node
 ## 🐛 Common Issues
 
 **Issue**: Tailwind classes not working
+
 - **Fix**: Ensure Tailwind CDN is loaded or CSS is built
 
 **Issue**: npm commands not found
+
 - **Fix**: Install Node.js from nodejs.org
 
 **Issue**: Games not loading
+
 - **Fix**: Check `games.json` paths and file existence
 
 ---

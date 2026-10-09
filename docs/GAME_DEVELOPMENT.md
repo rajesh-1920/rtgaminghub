@@ -14,6 +14,7 @@ Welcome to the RTGamingHub game development guide! This document will help you u
 ## Project Overview
 
 RTGamingHub is a platform for classic childhood games built with:
+
 - **HTML5** - Semantic markup
 - **Tailwind CSS** - Utility-first CSS framework
 - **Vanilla JavaScript** - No frameworks or dependencies
@@ -37,6 +38,7 @@ rtgaminghub/
 ### Creating a New Game
 
 1. **Create game folder**
+
    ```
    games/[game-name]/
    ├── home.html
@@ -50,35 +52,36 @@ rtgaminghub/
    ```
 
 2. **HTML Structure**
+
    ```html
    <!DOCTYPE html>
    <html lang="en">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
        <title>Game Name</title>
        <script src="https://cdn.tailwindcss.com"></script>
-       <link rel="stylesheet" href="./assets/css/home.css">
-   </head>
-   <body>
+       <link rel="stylesheet" href="./assets/css/home.css" />
+     </head>
+     <body>
        <!-- Game content -->
        <script src="./assets/js/home.js"></script>
-   </body>
+     </body>
    </html>
    ```
 
 3. **Update games.json**
    ```json
    {
-       "id": "game-id",
-       "name": "Game Name",
-       "description": "Game description",
-       "path": "./games/game-name/home.html",
-       "icon": "🎮",
-       "category": "category",
-       "players": "1",
-       "difficulty": "Easy",
-       "image": "/public/images/game-name.webp"
+     "id": "game-id",
+     "name": "Game Name",
+     "description": "Game description",
+     "path": "./games/game-name/home.html",
+     "icon": "🎮",
+     "category": "category",
+     "players": "1",
+     "difficulty": "Easy",
+     "image": "/public/images/game-name.webp"
    }
    ```
 
@@ -90,9 +93,7 @@ All games should use Tailwind CSS for styling:
 
 ```html
 <!-- Instead of custom CSS -->
-<button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-    Click Me
-</button>
+<button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Click Me</button>
 ```
 
 ### Common Classes
@@ -109,13 +110,13 @@ All games should use Tailwind CSS for styling:
 
 <!-- Flexbox -->
 <div class="flex justify-center items-center space-x-4">
-    <item>1</item>
-    <item>2</item>
+  <item>1</item>
+  <item>2</item>
 </div>
 
 <!-- Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <!-- Grid items -->
+  <!-- Grid items -->
 </div>
 ```
 
@@ -124,19 +125,14 @@ All games should use Tailwind CSS for styling:
 Use helper functions from `/src/js/utils/helpers.js`:
 
 ```javascript
-import { 
-    getRandomNumber, 
-    isMobileDevice, 
-    setLocalStorage, 
-    getLocalStorage 
-} from './helpers.js';
+import { getRandomNumber, isMobileDevice, setLocalStorage, getLocalStorage } from './helpers.js';
 
 // Random number
 const random = getRandomNumber(1, 10);
 
 // Check device
 if (isMobileDevice()) {
-    // Mobile specific code
+  // Mobile specific code
 }
 
 // Store score
@@ -147,6 +143,7 @@ const score = getLocalStorage('game-score');
 ## Best Practices
 
 ### Performance
+
 - Minimize DOM manipulation
 - Use event delegation
 - Cache DOM queries
@@ -154,6 +151,7 @@ const score = getLocalStorage('game-score');
 - Lazy load images when possible
 
 ### Accessibility
+
 - Use semantic HTML
 - Include alt text for images
 - Support keyboard navigation
@@ -161,6 +159,7 @@ const score = getLocalStorage('game-score');
 - Test with screen readers
 
 ### User Experience
+
 - Clear game instructions
 - Visual feedback for actions
 - Loading indicators
@@ -168,6 +167,7 @@ const score = getLocalStorage('game-score');
 - Mobile-friendly layout
 
 ### Code Quality
+
 - Write self-documenting code
 - Add comments for complex logic
 - Use meaningful variable names
@@ -175,6 +175,7 @@ const score = getLocalStorage('game-score');
 - Test thoroughly
 
 ### Mobile Optimization
+
 ```css
 /* Touch-friendly buttons */
 min-height: 44px;
@@ -193,10 +194,10 @@ width: 100vw;
 ```javascript
 // Keep game state organized
 const gameState = {
-    score: 0,
-    level: 1,
-    gameOver: false,
-    playerName: 'Player1',
+  score: 0,
+  level: 1,
+  gameOver: false,
+  playerName: 'Player1',
 };
 
 // Update state
@@ -204,14 +205,14 @@ gameState.score += 10;
 
 // Save/load from localStorage
 function saveGame() {
-    localStorage.setItem('gameState', JSON.stringify(gameState));
+  localStorage.setItem('gameState', JSON.stringify(gameState));
 }
 
 function loadGame() {
-    const saved = localStorage.getItem('gameState');
-    if (saved) {
-        Object.assign(gameState, JSON.parse(saved));
-    }
+  const saved = localStorage.getItem('gameState');
+  if (saved) {
+    Object.assign(gameState, JSON.parse(saved));
+  }
 }
 ```
 
@@ -220,14 +221,14 @@ function loadGame() {
 ```javascript
 // Delegation for dynamic elements
 document.addEventListener('click', (e) => {
-    if (e.target.matches('.game-btn')) {
-        handleGameBtnClick(e.target);
-    }
+  if (e.target.matches('.game-btn')) {
+    handleGameBtnClick(e.target);
+  }
 });
 
 // Cleanup listeners
 function removeGameListeners() {
-    document.removeEventListener('click', handleGameBtnClick);
+  document.removeEventListener('click', handleGameBtnClick);
 }
 ```
 

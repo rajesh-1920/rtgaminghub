@@ -60,12 +60,18 @@
       card.href = game.path;
       card.className = 'game-card group';
       card.setAttribute('data-game-link', game.path);
-      card.setAttribute('data-search', [game.name, game.description, game.category, game.difficulty].join(' ').toLowerCase());
+      card.setAttribute(
+        'data-search',
+        [game.name, game.description, game.category, game.difficulty].join(' ').toLowerCase()
+      );
       const gradient = GRADIENTS[i % GRADIENTS.length];
       const playersLabel = game.players === '1' ? '1 Player' : game.players + ' Players';
 
       const visual = document.createElement('div');
-      visual.className = 'relative h-48 bg-gradient-to-br ' + gradient + ' flex items-center justify-center overflow-hidden';
+      visual.className =
+        'relative h-48 bg-gradient-to-br ' +
+        gradient +
+        ' flex items-center justify-center overflow-hidden';
       const emoji = document.createElement('div');
       emoji.className = 'text-8xl group-hover:scale-125 transition-transform duration-300';
       emoji.textContent = game.icon || '🎮';
@@ -135,10 +141,11 @@
       if (err && window.console) console.warn('Theme read unavailable.');
     }
     apply(initial);
-    if (btn) btn.addEventListener('click', () => {
-      const isDark = document.body.classList.contains('dark');
-      apply(isDark ? 'light' : 'dark');
-    });
+    if (btn)
+      btn.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('dark');
+        apply(isDark ? 'light' : 'dark');
+      });
   }
 
   function setupFooterYear() {

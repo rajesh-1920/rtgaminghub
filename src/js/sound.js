@@ -19,7 +19,10 @@
   function tone(freq, dur, type) {
     if (!enabled()) return;
     try {
-      if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
         return;
       }
       ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();

@@ -50,16 +50,19 @@ rtgaminghub/
 ## 🎮 Games Included
 
 ### 1. **Tic Tac Toe** 🎯
+
 - Classic 3x3 grid strategy game
 - Play against another player
 - Difficulty: Easy
 
 ### 2. **Rock Paper Scissors** ✋
+
 - Timeless chance-based game
 - Play against AI
 - Difficulty: Easy
 
 ### 3. **Bat Ball Stump** 🏏
+
 - Cricket-inspired action game
 - Single player challenge
 - Difficulty: Medium
@@ -67,12 +70,14 @@ rtgaminghub/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - Node.js (optional, for Tailwind CSS build process)
 
 ### Quick Start
 
 1. **Clone or download the repository**
+
    ```bash
    git clone https://github.com/yourusername/rtgaminghub.git
    cd rtgaminghub
@@ -91,9 +96,11 @@ rtgaminghub/
 ## 📦 Installation
 
 ### Using the Tailwind CSS CDN (Recommended for beginners)
+
 The project is pre-configured to use Tailwind CSS via CDN. No additional setup needed!
 
 ### Using Build Process
+
 For production optimization:
 
 ```bash
@@ -133,6 +140,7 @@ npm run watch:css
 ## 🎨 Customization
 
 ### Colors
+
 Edit `tailwind.config.js` to customize the color scheme:
 
 ```javascript
@@ -148,6 +156,7 @@ theme: {
 ```
 
 ### Fonts
+
 Modify the font configuration in the same file or inline styles in HTML.
 
 ## 📱 Browser Support
@@ -185,6 +194,7 @@ Found a bug? Have a feature request? Please open an issue on GitHub or contact u
 ## 🎓 Learning Resources
 
 This project is great for learning:
+
 - HTML5 fundamentals
 - CSS with Tailwind
 - Vanilla JavaScript game development

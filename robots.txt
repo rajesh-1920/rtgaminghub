@@ -1,0 +1,5 @@
+# RTGamingHub - Static site
+User-agent: *
+Allow: /
+
+Sitemap: https://yourusername.github.io/rtgaminghub/sitemap.xml

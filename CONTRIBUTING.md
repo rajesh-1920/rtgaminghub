@@ -9,12 +9,14 @@ This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.
 ## How to Contribute
 
 ### Reporting Bugs
+
 1. Check if the bug has already been reported
 2. Provide a clear description and steps to reproduce
 3. Include browser and device information
 4. Attach screenshots if applicable
 
 ### Suggesting Features
+
 1. Check if the feature has been suggested before
 2. Clearly describe the feature and its benefits
 3. Provide examples of how it would work
@@ -23,12 +25,14 @@ This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.
 ### Submitting Pull Requests
 
 1. **Fork the repository**
+
    ```bash
    git clone https://github.com/yourusername/rtgaminghub.git
    cd rtgaminghub
    ```
 
 2. **Create a feature branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -39,11 +43,13 @@ This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.
    - Test your changes thoroughly
 
 4. **Commit your changes**
+
    ```bash
    git commit -m "Add your meaningful commit message"
    ```
 
 5. **Push to your fork**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -56,24 +62,28 @@ This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.
 ## Development Guidelines
 
 ### Code Style
+
 - Use consistent indentation (2 spaces)
 - Write meaningful variable and function names
 - Add comments for complex logic
 - Keep functions small and focused
 
 ### JavaScript Standards
+
 - Use vanilla JavaScript (no frameworks)
 - Avoid global variables when possible
 - Use ES6 features when appropriate
 - Write comments for function purposes
 
 ### CSS Guidelines
+
 - Use Tailwind CSS utility classes
 - Create reusable components
 - Follow mobile-first approach
 - Test responsive design
 
 ### HTML Best Practices
+
 - Use semantic HTML
 - Include proper accessibility attributes
 - Optimize images
@@ -82,6 +92,7 @@ This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.
 ## Testing
 
 Before submitting:
+
 1. Test on multiple browsers
 2. Test on mobile devices
 3. Check for console errors
@@ -107,6 +118,7 @@ Before submitting:
 ## Commit Message Guidelines
 
 Use clear commit messages:
+
 - ✨ `feat:` - New feature
 - 🐛 `fix:` - Bug fix
 - 📚 `docs:` - Documentation

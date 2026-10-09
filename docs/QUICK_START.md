@@ -3,6 +3,7 @@
 ## 🚀 Get Up and Running in 2 Minutes
 
 ### Step 1: Open the Project
+
 Simply navigate to the project folder and open `index.html` in your web browser.
 
 ```bash
@@ -18,6 +19,7 @@ python -m http.server 8000
 ```
 
 ### Step 2: Play Games!
+
 Click on any game card to start playing. No setup required!
 
 ---
@@ -74,6 +76,7 @@ Your project is organized into these main sections:
 ## 🛠️ Development Setup
 
 ### Option A: CDN Only (Easiest)
+
 - The project uses Tailwind CSS CDN
 - No build process needed
 - Just open in browser and start developing
@@ -110,9 +113,7 @@ npm run dev
 
 ```html
 <!-- In game's home.html -->
-<button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-    My Button
-</button>
+<button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">My Button</button>
 ```
 
 ---
@@ -122,6 +123,7 @@ npm run dev
 ### Step-by-Step:
 
 1. **Create Game Folder**
+
    ```bash
    mkdir games/my-game
    mkdir games/my-game/assets
@@ -135,20 +137,21 @@ npm run dev
    - `games/my-game/assets/js/home.js`
 
 3. **Add Basic HTML**
+
    ```html
    <!DOCTYPE html>
    <html lang="en">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
        <title>My Game</title>
        <script src="https://cdn.tailwindcss.com"></script>
-       <link rel="stylesheet" href="./assets/css/home.css">
-   </head>
-   <body>
+       <link rel="stylesheet" href="./assets/css/home.css" />
+     </head>
+     <body>
        <!-- Your game here -->
        <script src="./assets/js/home.js"></script>
-   </body>
+     </body>
    </html>
    ```
 
@@ -176,19 +179,17 @@ npm run dev
 
 <!-- Flexbox -->
 <div class="flex justify-center items-center gap-4">
-    <item>1</item>
-    <item>2</item>
+  <item>1</item>
+  <item>2</item>
 </div>
 
 <!-- Grid -->
 <div class="grid grid-cols-3 gap-4">
-    <!-- 3 columns on desktop -->
+  <!-- 3 columns on desktop -->
 </div>
 
 <!-- Hover Effects -->
-<button class="bg-blue-600 hover:bg-blue-700 transition-all">
-    Hover me
-</button>
+<button class="bg-blue-600 hover:bg-blue-700 transition-all">Hover me</button>
 ```
 
 See [Tailwind Docs](https://tailwindcss.com/docs) for more options.
@@ -198,16 +199,19 @@ See [Tailwind Docs](https://tailwindcss.com/docs) for more options.
 ## 🐛 Troubleshooting
 
 ### Game not loading?
+
 - Check browser console for errors (F12 or Cmd+Option+I)
 - Verify file paths are correct
 - Ensure all files exist
 
 ### Styling not working?
+
 - Clear browser cache (Ctrl+Shift+Delete)
 - Make sure Tailwind CDN is loaded
 - Check class names are spelled correctly
 
 ### Game not starting?
+
 - Check JavaScript console for errors
 - Verify event listeners are attached
 - Ensure HTML IDs match JavaScript selectors
@@ -226,12 +230,14 @@ See [Tailwind Docs](https://tailwindcss.com/docs) for more options.
 ## 💡 Tips
 
 ✅ **Do:**
+
 - Test on mobile devices
 - Keep code organized
 - Comment complex logic
 - Use semantic HTML
 
 ❌ **Don't:**
+
 - Use inline styles instead of Tailwind
 - Add external dependencies unnecessarily
 - Leave console errors

@@ -9,7 +9,9 @@
   const bestEl = document.getElementById('best');
   const historyEl = document.getElementById('history');
   const restartBtn = document.getElementById('restart');
-  let secret = 0, tries = 0, over = false;
+  let secret = 0,
+    tries = 0,
+    over = false;
 
   init();
   form.addEventListener('submit', (e) => {
@@ -48,7 +50,8 @@
 
   function init() {
     secret = 1 + Math.floor(Math.random() * 100);
-    tries = 0; over = false;
+    tries = 0;
+    over = false;
     historyEl.innerHTML = '';
     leftEl.textContent = String(MAX_TRIES);
     statusEl.textContent = 'Make your first guess!';
@@ -59,10 +62,15 @@
       const n = Number(localStorage.getItem(KEY)) || 0;
       localStorage.setItem(KEY, String(n + 1));
       paintBest();
-    } catch (e) { console.error(e); }
+    } catch (e) {
+      console.error(e);
+    }
   }
   function paintBest() {
-    try { bestEl.textContent = (localStorage.getItem(KEY) || '0') + ' wins'; }
-    catch (_) { bestEl.textContent = '—'; }
+    try {
+      bestEl.textContent = (localStorage.getItem(KEY) || '0') + ' wins';
+    } catch (_) {
+      bestEl.textContent = '—';
+    }
   }
 })();

@@ -15,10 +15,10 @@
       ▼            ▼            ▼
   Tic Tac Toe   Rock Paper   Bat Ball
                 Scissors      Stump
-  
+
   Each game has:
   - HTML structure
-  - CSS styling  
+  - CSS styling
   - JavaScript logic
 ```
 
@@ -130,22 +130,9 @@ rtgaminghub/                    # Root directory
 ### Landing Page (`index.html`)
 
 ```html
-Header (Navigation)
-│
-├── Hero Section (Call-to-action)
-│
-├── Games Section
-│   ├── Game Card 1 (Tic Tac Toe)
-│   ├── Game Card 2 (Rock Paper Scissors)
-│   └── Game Card 3 (Bat Ball Stump)
-│
-├── Features Section
-│
-├── About Section
-│
-├── CTA Section
-│
-└── Footer
+Header (Navigation) │ ├── Hero Section (Call-to-action) │ ├── Games Section │ ├── Game Card 1 (Tic
+Tac Toe) │ ├── Game Card 2 (Rock Paper Scissors) │ └── Game Card 3 (Bat Ball Stump) │ ├── Features
+Section │ ├── About Section │ ├── CTA Section │ └── Footer
 ```
 
 ### Each Game Structure
@@ -167,6 +154,7 @@ games/[game-name]/
 ## File Dependencies
 
 ### index.html depends on:
+
 ```
 index.html
 ├── Tailwind CSS CDN
@@ -176,6 +164,7 @@ index.html
 ```
 
 ### Game pages depend on:
+
 ```
 games/[game-name]/home.html
 ├── Tailwind CSS CDN
@@ -195,7 +184,7 @@ const gameState = {
   score: 0,
   moves: [],
   gameOver: false,
-  winner: null
+  winner: null,
 };
 ```
 
@@ -206,7 +195,7 @@ const gameState = {
 const appState = {
   currentGame: null,
   userPreferences: {},
-  loadedGames: []
+  loadedGames: [],
 };
 ```
 
@@ -222,29 +211,39 @@ localStorage.setItem('gameState', JSON.stringify(gameState));
 ## CSS Architecture
 
 ### Layer 1: Tailwind Base
+
 ```css
 @tailwind base;
 /* Reset and default styles */
 ```
 
 ### Layer 2: Components
+
 ```css
 @layer components {
-  .btn-primary { /* button styles */ }
-  .game-card { /* card styles */ }
+  .btn-primary {
+    /* button styles */
+  }
+  .game-card {
+    /* card styles */
+  }
 }
 ```
 
 ### Layer 3: Utilities
+
 ```css
 @tailwind utilities;
 /* Single-purpose utilities */
 ```
 
 ### Layer 4: Custom
+
 ```css
 /* Custom animations, keyframes */
-@keyframes fadeInUp { /* ... */ }
+@keyframes fadeInUp {
+  /* ... */
+}
 ```
 
 ---
@@ -284,17 +283,18 @@ Save to localStorage (optional)
 ## Performance Considerations
 
 ### Loading Performance
+
 ```
 1. Critical Path
    - HTML
    - Tailwind CDN
    - Main JS
    - Games JSON
-   
+
 2. Non-Critical
    - Game images
    - Individual game JS (lazy loaded)
-   
+
 3. Optimization
    - Minify CSS/JS
    - Compress images
@@ -302,6 +302,7 @@ Save to localStorage (optional)
 ```
 
 ### Runtime Performance
+
 ```
 - Use event delegation
 - Cache DOM queries
@@ -315,40 +316,43 @@ Save to localStorage (optional)
 ## Scalability Plan
 
 ### Easy to Add
+
 ```
 ✅ New Games
   └── Create new folder in /games/
-  
+
 ✅ New Pages
   └── Create new HTML file in root
-  
+
 ✅ New Features
   └── Add components to src/
-  
+
 ✅ New Utilities
   └── Add functions to src/js/utils/
 ```
 
 ### Medium Complexity
+
 ```
 ⚠️ User Accounts
   └── Need backend/database
-  
+
 ⚠️ Multiplayer
   └── Need WebSocket/Server
-  
+
 ⚠️ Analytics
   └── Need tracking service
 ```
 
 ### High Complexity
+
 ```
 ❌ Real-time multiplayer
   └── WebSocket server needed
-  
+
 ❌ User monetization
   └── Payment processor needed
-  
+
 ❌ Mobile app
   └── React Native/Flutter needed
 ```
@@ -358,12 +362,14 @@ Save to localStorage (optional)
 ## Security Considerations
 
 ### Current Protections
+
 - ✅ No external API calls
 - ✅ No user authentication
 - ✅ localStorage (browser sandbox)
 - ✅ CSP headers (if deployed)
 
 ### Best Practices
+
 - ✅ Sanitize any user input
 - ✅ Validate data before storing
 - ✅ Use HTTPS in production
@@ -374,6 +380,7 @@ Save to localStorage (optional)
 ## Deployment Architecture
 
 ### Development
+
 ```
 Local Machine
     ↓
@@ -383,6 +390,7 @@ Browser (http://localhost:8000)
 ```
 
 ### Production
+
 ```
 Source Files (GitHub)
     ↓
@@ -402,16 +410,19 @@ User Browser
 ## Future Architecture Improvements
 
 ### Phase 1 (Current)
+
 - ✅ Static files
 - ✅ Client-side rendering
 - ✅ Vanilla JavaScript
 
 ### Phase 2 (Planned)
+
 - 🔲 Service Worker (PWA)
 - 🔲 IndexedDB for offline
 - 🔲 Build tools (Webpack/Vite)
 
 ### Phase 3 (Vision)
+
 - 🔲 Backend API
 - 🔲 User authentication
 - 🔲 Leaderboard system
@@ -422,6 +433,7 @@ User Browser
 ## Integration Points
 
 ### External Services
+
 ```
 - Tailwind CDN (CSS)
 - Google Fonts (Fonts)
@@ -430,6 +442,7 @@ User Browser
 ```
 
 ### Internal Services
+
 ```
 - localStorage API
 - DOM API
@@ -442,18 +455,21 @@ User Browser
 ## Testing Strategy
 
 ### Unit Tests
+
 ```javascript
 // Test individual game logic
 test('calculateScore', () => { ... });
 ```
 
 ### Integration Tests
+
 ```javascript
 // Test component interactions
 test('loadGame', () => { ... });
 ```
 
 ### E2E Tests
+
 ```javascript
 // Test user workflows
 test('userPlaysGame', () => { ... });
@@ -464,12 +480,14 @@ test('userPlaysGame', () => { ... });
 ## Monitoring & Logging
 
 ### Development
+
 ```javascript
 console.log('Game started');
 console.error('Game error');
 ```
 
 ### Production
+
 ```javascript
 // Optional: Send to logging service
 logEvent('game_started', { gameId: 'tic-tac-toe' });

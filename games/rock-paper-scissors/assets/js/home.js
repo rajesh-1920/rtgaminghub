@@ -30,7 +30,11 @@
     buttons.forEach((b) => b.classList.remove('is-active', 'is-win', 'is-lose'));
     const playerBtn = buttons.find((b) => b.dataset.choice === playerChoice);
     const computerBtn = buttons.find((b) => b.dataset.choice === computerChoice);
-    if (playerBtn) playerBtn.classList.add('is-active', outcome === 'win' ? 'is-win' : outcome === 'lose' ? 'is-lose' : 'is-win');
+    if (playerBtn)
+      playerBtn.classList.add(
+        'is-active',
+        outcome === 'win' ? 'is-win' : outcome === 'lose' ? 'is-lose' : 'is-win'
+      );
     if (computerBtn && computerChoice !== playerChoice) {
       computerBtn.classList.add(outcome === 'win' ? 'is-lose' : 'is-win');
     }
@@ -57,7 +61,9 @@
   function randomChoice() {
     try {
       if (window.RTUtils) return CHOICES[window.RTUtils.getRandomNumber(0, 2)];
-    } catch (_) { /* fallback */ }
+    } catch (_) {
+      /* fallback */
+    }
     return CHOICES[Math.floor(Math.random() * 3)];
   }
 

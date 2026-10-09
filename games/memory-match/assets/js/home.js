@@ -8,14 +8,21 @@
   const bestEl = document.getElementById('best');
   const statusEl = document.getElementById('status');
   const restartBtn = document.getElementById('restart');
-  let deck = [], first = null, lock = false, moves = 0, pairs = 0;
+  let deck = [],
+    first = null,
+    lock = false,
+    moves = 0,
+    pairs = 0;
 
   init();
   restartBtn.addEventListener('click', init);
 
   function init() {
     deck = shuffle([...EMOJI, ...EMOJI]);
-    first = null; lock = false; moves = 0; pairs = 0;
+    first = null;
+    lock = false;
+    moves = 0;
+    pairs = 0;
     board.innerHTML = '';
     deck.forEach((emo, i) => {
       const b = document.createElement('button');
@@ -36,7 +43,10 @@
     if (lock || btn.classList.contains('open') || btn.classList.contains('matched')) return;
     btn.classList.add('open');
     if (window.RTSound) window.RTSound.click();
-    if (!first) { first = btn; return; }
+    if (!first) {
+      first = btn;
+      return;
+    }
     moves += 1;
     if (first.dataset.emo === btn.dataset.emo) {
       first.classList.add('matched');
@@ -47,9 +57,14 @@
       if (pairs === EMOJI.length) win();
     } else {
       lock = true;
-      const a = first; first = null;
+      const a = first;
+      first = null;
       paint();
-      setTimeout(() => { a.classList.remove('open'); btn.classList.remove('open'); lock = false; }, 700);
+      setTimeout(() => {
+        a.classList.remove('open');
+        btn.classList.remove('open');
+        lock = false;
+      }, 700);
     }
     paint();
   }
@@ -62,16 +77,25 @@
         localStorage.setItem(KEY, String(moves));
         paintBest();
       }
-    } catch (e) { console.error(e); }
+    } catch (e) {
+      console.error(e);
+    }
   }
-  function paint() { movesEl.textContent = moves; pairsEl.textContent = pairs; }
+  function paint() {
+    movesEl.textContent = moves;
+    pairsEl.textContent = pairs;
+  }
   function paintBest() {
     try {
       const b = localStorage.getItem(KEY);
       bestEl.textContent = b ? b + ' moves' : '—';
-    } catch (_) { bestEl.textContent = '—'; }
+    } catch (_) {
+      bestEl.textContent = '—';
+    }
   }
-  function setStatus(t) { statusEl.textContent = t; }
+  function setStatus(t) {
+    statusEl.textContent = t;
+  }
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));

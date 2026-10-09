@@ -8,7 +8,7 @@
     "start": "npm run dev",
     "build:css": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css --minify",
     "watch:css": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css --watch",
-    "lint:js": "eslint src games scripts public/sw.js tailwind.config.js --ext .js,.mjs",
+    "lint:js": "eslint src games scripts sw.js tailwind.config.js --ext .js,.mjs",
     "lint:css": "stylelint src/css/input.css",
     "format": "prettier --write \"**/*.{html,js,css,json,md}\"",
     "format:check": "prettier --check \"**/*.{html,js,css,json,md}\"",
