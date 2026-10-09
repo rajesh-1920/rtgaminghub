@@ -1,251 +1,582 @@
-# RTGamingHub - Game Development Guide
+# RTGamingHub - Game Development Guide (v1.2.0)
 
-Welcome to the RTGamingHub game development guide! This document will help you understand the project structure and best practices for developing games.
+Welcome to the RTGamingHub game development guide! This document covers the current patterns, tooling, and best practices for creating and maintaining games on the platform.
 
-## Table of Contents
+---
 
-1. [Project Overview](#project-overview)
-2. [Directory Structure](#directory-structure)
-3. [Game Development](#game-development)
-4. [Styling Guide](#styling-guide)
-5. [JavaScript Utilities](#javascript-utilities)
-6. [Best Practices](#best-practices)
-
-## Project Overview
+## 1. Project Overview
 
 RTGamingHub is a platform for classic childhood games built with:
 
-- **HTML5** - Semantic markup
-- **Tailwind CSS** - Utility-first CSS framework
-- **Vanilla JavaScript** - No frameworks or dependencies
+- **HTML5** — Semantic markup, accessibility-first
+- **Tailwind CSS** — Built via `npm run build:css` (no CDN); source in `src/css/input.css`
+- **Vanilla JavaScript (ES2021)** — No frameworks; IIFE pattern + global fallbacks
+- **PWA-ready** — Manifest + Service Worker (root scope) + offline fallback
 
-## Directory Structure
+---
+
+## 2. Directory Structure (v1.2.0)
 
 ```
 rtgaminghub/
+├── games/                 ← All game folders (5 games)
+│   └── [game-name]/
+│       ├── home.html      # Markup + meta tags (OG, canonical)
+│       ├── assets/
+│       │   ├── css/
+│       │   │   └── home.css   # Game styles (CSS variables)
+│       │   └── js/
+│       │       └── home.js    # Game logic (IIFE + globals)
+│       └── README.md      # Rules, controls, structure
+├── public/
+│   ├── images/            # Game thumbnails (WebP)
+│   └── data/games.json    # Games metadata (source of truth)
 ├── src/
-│   ├── css/          # Global styles (Tailwind)
+│   ├── css/
+│   │   ├── input.css      # Tailwind source
+│   │   └── main.css       # Built + minified (committed)
 │   └── js/
-│       ├── main.js   # Application entry point
-│       └── utils/    # Shared utilities
-├── games/            # All game folders
-├── public/           # Public assets
-└── docs/             # Documentation
+│       ├── main.js        # Hub (grid, search, theme, SW)
+│       ├── sound.js       # WebAudio (win/lose/draw/click/toggle)
+│       └── utils/helpers.js # ES module + window.RTUtils global
+└── scripts/
+    ├── validate.mjs       # Repo validator
+    └── sitemap.mjs        # Sitemap generator
 ```
 
-## Game Development
+---
 
-### Creating a New Game
+## 3. Creating a New Game
 
-1. **Create game folder**
+### Step-by-Step Template
 
-   ```
-   games/[game-name]/
-   ├── home.html
-   ├── README.md
-   └── assets/
-       ├── css/
-       │   └── home.css
-       ├── js/
-       │   └── home.js
-       └── images/
-   ```
+```bash
+# 1. Create folder structure
+mkdir -p games/my-game/assets/css games/my-game/assets/js
 
-2. **HTML Structure**
+# 2. Copy template files from an existing game (e.g., memory-match)
+cp games/memory-match/home.html games/my-game/home.html
+cp games/memory-match/assets/css/home.css games/my-game/assets/css/home.css
+cp games/memory-match/assets/js/home.js games/my-game/assets/js/home.js
+cp games/memory-match/README.md games/my-game/README.md
 
-   ```html
-   <!DOCTYPE html>
-   <html lang="en">
-     <head>
-       <meta charset="UTF-8" />
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       <title>Game Name</title>
-       <script src="https://cdn.tailwindcss.com"></script>
-       <link rel="stylesheet" href="./assets/css/home.css" />
-     </head>
-     <body>
-       <!-- Game content -->
-       <script src="./assets/js/home.js"></script>
-     </body>
-   </html>
-   ```
+# 3. Edit all four files (see details below)
 
-3. **Update games.json**
-   ```json
-   {
-     "id": "game-id",
-     "name": "Game Name",
-     "description": "Game description",
-     "path": "./games/game-name/home.html",
-     "icon": "🎮",
-     "category": "category",
-     "players": "1",
-     "difficulty": "Easy",
-     "image": "/public/images/game-name.webp"
-   }
-   ```
+# 4. Add WebP thumbnail
+#    Create games/my-game.webp (or any) → copy to public/images/my-game.webp
 
-## Styling Guide
+# 5. Add entry to public/data/games.json (see schema below)
 
-### Using Tailwind CSS
+# 6. Regenerate sitemap + validate
+npm run sitemap
+npm run validate
+```
 
-All games should use Tailwind CSS for styling:
+### Required: `home.html` Meta Tags
 
 ```html
-<!-- Instead of custom CSS -->
-<button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Click Me</button>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Short description for SEO/social" />
+    <meta property="og:title" content="My Game | RTGamingHub" />
+    <meta property="og:description" content="Short description for social sharing" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#3b82f6" />
+    <title>My Game | RTGamingHub</title>
+    <link
+      rel="canonical"
+      href="https://yourusername.github.io/rtgaminghub/games/my-game/home.html"
+    />
+    <link rel="stylesheet" href="./assets/css/home.css" />
+  </head>
+  <body>
+    <a class="back-link" href="../../index.html">← Back to Games</a>
+    <main>
+      <!-- Your game markup -->
+    </main>
+    <script src="./assets/js/home.js"></script>
+  </body>
+</html>
 ```
 
-### Common Classes
+**Required meta tags** (validated by `scripts/validate.mjs`):
 
-```html
-<!-- Spacing -->
-<div class="p-4 mb-8">Content</div>
+- `description` — plain text
+- `og:title`, `og:description`, `og:type` — Open Graph
+- `theme-color` — matches PWA manifest
+- `canonical` — absolute URL to this game page
 
-<!-- Colors -->
-<div class="bg-blue-600 text-white">Blue Box</div>
+### Required: `games.json` Entry
 
-<!-- Responsive -->
-<div class="text-sm md:text-lg lg:text-xl">Responsive Text</div>
-
-<!-- Flexbox -->
-<div class="flex justify-center items-center space-x-4">
-  <item>1</item>
-  <item>2</item>
-</div>
-
-<!-- Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <!-- Grid items -->
-</div>
+```json
+{
+  "id": "my-game",
+  "name": "My Game",
+  "description": "Short description for landing page card",
+  "path": "./games/my-game/home.html",
+  "icon": "🎮",
+  "category": "puzzle", // strategy | chance | action | puzzle
+  "players": "1", // "1" or "2"
+  "difficulty": "Easy", // Easy | Medium | Hard
+  "image": "./public/images/my-game.webp"
+}
 ```
 
-## JavaScript Utilities
+**Fields validated**: `id` (unique), `name`, `description`, `path`, `icon`, `category`, `players`, `difficulty`, `image` (file must exist).
 
-Use helper functions from `/src/js/utils/helpers.js`:
+### Required: `README.md`
 
-```javascript
-import { getRandomNumber, isMobileDevice, setLocalStorage, getLocalStorage } from './helpers.js';
+Copy template from `games/memory-match/README.md`:
 
-// Random number
-const random = getRandomNumber(1, 10);
+- Rules & how to play
+- Controls (keyboard + mouse)
+- File structure
+- Development notes (globals used, storage keys)
+- License
 
-// Check device
-if (isMobileDevice()) {
-  // Mobile specific code
+---
+
+## 4. Game File Templates
+
+### `assets/css/home.css` — CSS Variables Pattern
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// Store score
-setLocalStorage('game-score', 100);
-const score = getLocalStorage('game-score');
+:root {
+  /* Your palette */
+  --primary: #3b82f6;
+  --bg-main: #0f172a;
+  --card: #1e293b;
+  --win: #10b981;
+  --lose: #ef4444;
+  --muted: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+  background: var(--bg-main);
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.back-link {
+  align-self: flex-start;
+  text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.back-link:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Your game styles here */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile adjustments */
+}
 ```
 
-## Best Practices
+**Requirements:**
+
+- Define palette in `:root` CSS variables
+- Use `system-ui` font stack (no external fonts needed)
+- Include `prefers-reduced-motion` media query
+- Include `focus-visible` styles
+- Mobile-first responsive (`max-width: 480px`)
+
+---
+
+### `assets/js/home.js` — IIFE + Global Fallbacks
+
+```javascript
+(() => {
+  'use strict';
+
+  // ── State ──────────────────────────────────────────────
+  const state = {
+    score: 0,
+    best: 0,
+    // ...
+  };
+
+  // ── DOM Elements (cached) ─────────────────────────────
+  const elements = {
+    scoreEl: document.getElementById('score'),
+    // ...
+  };
+
+  // ── Init ───────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', init);
+
+  function init() {
+    loadState();
+    bindEvents();
+    render();
+  }
+
+  // ── Events ─────────────────────────────────────────────
+  function bindEvents() {
+    // Use addEventListener (not onclick)
+    document.getElementById('btn').addEventListener('click', handleClick);
+    document.addEventListener('keydown', handleKeydown);
+  }
+
+  // ── Game Logic ─────────────────────────────────────────
+  function handleClick() { ... }
+  function handleKeydown(e) { ... }
+
+  // ── Render ─────────────────────────────────────────────
+  function render() {
+    elements.scoreEl.textContent = state.score;
+    // Use textContent (not innerHTML) for safety
+  }
+
+  // ── Persistence (localStorage) ─────────────────────────
+  const STORAGE_KEY = 'rtgaminghub-my-game';
+
+  function loadState() {
+    try {
+      const saved = window.RTUtils?.getLocalStorage(STORAGE_KEY);
+      if (saved) Object.assign(state, saved);
+    } catch (e) { console.error('loadState', e); }
+  }
+
+  function saveState() {
+    try {
+      window.RTUtils?.setLocalStorage(STORAGE_KEY, state);
+    } catch (e) { console.error('saveState', e); }
+  }
+
+  // ── Sound (optional) ──────────────────────────────────
+  // window.RTSound?.click();
+  // window.RTSound?.win();
+  // window.RTSound?.lose();
+  // window.RTSound?.draw();
+
+})();
+```
+
+**Requirements:**
+
+- IIFE wrapper (`(() => { 'use strict'; ... })();`)
+- `'use strict'` at top
+- Cache DOM in `elements` object
+- Use `addEventListener` (not `onclick`)
+- `textContent` over `innerHTML` (XSS-safe)
+- `window.RTUtils` for random/storage (graceful fallback)
+- `window.RTSound` for effects (optional, graceful)
+- `localStorage` key: `rtgaminghub-<game-id>`
+- Respect `prefers-reduced-motion` (CSS handles animation; JS can check `matchMedia`)
+
+---
+
+## 5. Styling Guide
+
+### Tailwind (Built CSS Only)
+
+- **No CDN** — project uses built `src/css/main.css`
+- Available components (from `src/css/input.css`):
+  - `.btn-primary`, `.btn-secondary`
+  - `.game-card`, `.game-card-image`, `.game-card-content`, `.game-card-title`, `.game-card-description`
+  - `.section-title`, `.container-lg`
+  - `.animate-fade-in-up`
+- Utility classes from Tailwind base available
+
+### Game CSS Variables (Recommended)
+
+```css
+:root {
+  --primary: #3b82f6; /* matches Tailwind primary */
+  --bg-main: #0f172a;
+  --card: #1e293b;
+  --win: #10b981;
+  --lose: #ef4444;
+  --muted: #94a3b8;
+}
+```
+
+Use variables in your game CSS for theming consistency.
+
+### Responsive & Accessible
+
+```css
+/* Touch targets */
+button { min-height: 44px; min-width: 44px; }
+
+/* Prevent zoom on iOS */
+input { font-size: 16px; }
+
+/* Focus visible (already in main.css, but ensure your custom elements have it) */
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+/* Reduced motion (already in main.css) */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Mobile-first */
+@media (max-width: 480px) { ... }
+```
+
+---
+
+## 6. JavaScript Utilities (`window.RTUtils`)
+
+Available globally on all pages (from `src/js/utils/helpers.js`):
+
+```javascript
+// Random integer [min, max] (guards: min<=max, finite)
+window.RTUtils.getRandomNumber(min, max) → number
+
+// Random array item
+window.RTUtils.pickRandom(array) → item | undefined
+
+// Coarse-pointer detection (prefers matchMedia over UA)
+window.RTUtils.isMobileDevice() → boolean
+
+// localStorage (JSON, try/catch)
+window.RTUtils.setLocalStorage(key, value) → boolean
+window.RTUtils.getLocalStorage(key, fallback = null) → value
+window.RTUtils.removeLocalStorage(key) → void
+
+// Delay
+window.RTUtils.delay(ms) → Promise<void>
+
+// Locale-formatted score (non-negative, integer)
+window.RTUtils.formatScore(number) → string
+```
+
+**Usage in game JS:**
+
+```javascript
+const roll = window.RTUtils.getRandomNumber(1, 6);
+window.RTUtils.setLocalStorage('my-game-score', 42);
+const best = window.RTUtils.getLocalStorage('my-game-best', 0);
+```
+
+**Also available as ES module** (for scripts):
+
+```javascript
+import { getRandomNumber, setLocalStorage } from '../../src/js/utils/helpers.js';
+```
+
+---
+
+## 7. Sound Utility (`window.RTSound`)
+
+From `src/js/sound.js` — WebAudio, no assets:
+
+```javascript
+// Play effects
+window.RTSound.win(); // two-tone up
+window.RTSound.lose(); // low sawtooth
+window.RTSound.draw(); // triangle
+window.RTSound.click(); // short square
+
+// Toggle sound on/off (persists to localStorage 'rtgaminghub-sound')
+const nowOff = window.RTSound.toggle(); // returns new state (true = off)
+```
+
+**Respects:**
+
+- `localStorage['rtgaminghub-sound'] === 'off'` → muted
+- `prefers-reduced-motion: reduce` → muted
+- Graceful no-op if AudioContext unavailable
+
+---
+
+## 8. Adding Game to Landing Page (Automatic)
+
+Games are **automatically rendered** on `index.html` from `games.json`:
+
+1. Add entry to `public/data/games.json`
+2. Run `npm run sitemap` (updates `public/sitemap.xml`)
+3. Run `npm run validate` (verifies all fields + image exists)
+4. Landing page shows game card with:
+   - Gradient background (cycled from 6 presets)
+   - Emoji icon (`game.icon`)
+   - Name, description
+   - Player count + difficulty badges
+   - Search filter (by name, description, category, difficulty)
+
+**No manual HTML editing needed** for new games.
+
+---
+
+## 9. Best Practices
 
 ### Performance
 
-- Minimize DOM manipulation
-- Use event delegation
-- Cache DOM queries
-- Optimize images (use WebP)
-- Lazy load images when possible
+- Cache DOM queries in `elements` object
+- Use `addEventListener` + event delegation
+- `textContent` over `innerHTML` (XSS-safe)
+- Minimize reflows: batch DOM writes, use `classList` toggles
 
 ### Accessibility
 
-- Use semantic HTML
-- Include alt text for images
-- Support keyboard navigation
-- Ensure color contrast
-- Test with screen readers
+- Semantic HTML (`main`, `button`, `label`, `aria-live`)
+- `aria-label` on icon-only buttons
+- `role="status" aria-live="polite"` for dynamic messages
+- `:focus-visible` styles (in `main.css`; ensure custom elements work)
+- Color contrast (test with `prefers-contrast: more`)
+- Keyboard navigable (Tab, Enter, Space, Escape)
 
-### User Experience
+### State Management
 
-- Clear game instructions
-- Visual feedback for actions
-- Loading indicators
-- Error handling
-- Mobile-friendly layout
+- Single `state` object per game
+- Persist via `window.RTUtils.setLocalStorage(key, state)`
+- Load early in `init()`, save after each mutation
+- Storage key: `rtgaminghub-<game-id>` (e.g., `rtgaminghub-tic-tac-toe`)
+
+### Sound & Motion
+
+- Use `window.RTSound` for effects
+- CSS handles `prefers-reduced-motion` (animations disabled)
+- JS can check: `matchMedia('(prefers-reduced-motion: reduce)').matches`
+
+### Mobile
+
+- Touch targets ≥ 44×44px
+- `font-size: 16px` on inputs (prevents iOS zoom)
+- Test at 360px width
+- `height: 100dvh` (dynamic viewport) for full-screen games
 
 ### Code Quality
 
-- Write self-documenting code
-- Add comments for complex logic
-- Use meaningful variable names
-- Keep functions focused
-- Test thoroughly
+- IIFE wrapper + `'use strict'`
+- `const`/`let`, no `var`
+- Meaningful names, small functions
+- JSDoc comments for exported helpers
+- Run `npm run check` before commit
 
-### Mobile Optimization
+---
 
-```css
-/* Touch-friendly buttons */
-min-height: 44px;
-min-width: 44px;
+## 10. Validation & CI
 
-/* Prevent zoom on input */
-font-size: 16px;
+### Local Commands
 
-/* Full viewport height */
-height: 100vh;
-width: 100vw;
+```bash
+npm run check          # Full pipeline (lint + format + validate)
+npm run validate       # Files, games.json, images, READMEs, manifest, sitemap
+npm run sitemap        # Regenerate sitemap.xml
+npm run lint:js        # ESLint (src, games, scripts, sw.js, tailwind.config.js)
+npm run lint:css       # Stylelint (input.css)
+npm run format         # Prettier auto-fix
 ```
 
-### Game State Management
+### What `npm run validate` Checks
 
-```javascript
-// Keep game state organized
-const gameState = {
-  score: 0,
-  level: 1,
-  gameOver: false,
-  playerName: 'Player1',
-};
+- Required files exist (index.html, main.js, helpers.js, sound.js, input.css, main.css, games.json, manifest.json, sitemap.xml, robots.txt, sw.js, offline.html, 404.html)
+- `games.json`: schema, unique IDs, enums (category/difficulty), file paths exist, images exist
+- Per-game `README.md` present + >100 chars
+- `manifest.json`: shortcuts + icons present
+- `sitemap.xml`: ≥2 URLs
+- `public/images/`: WebP files count
 
-// Update state
-gameState.score += 10;
+### CI Pipeline (`.github/workflows/ci.yml`)
 
-// Save/load from localStorage
-function saveGame() {
-  localStorage.setItem('gameState', JSON.stringify(gameState));
-}
+Runs on push/PR:
 
-function loadGame() {
-  const saved = localStorage.getItem('gameState');
-  if (saved) {
-    Object.assign(gameState, JSON.parse(saved));
-  }
+1. `npm ci`
+2. `npm run build:css`
+3. `node --check` on all JS files
+4. `npm run lint:js`
+5. `npm run lint:css`
+6. `npm run format:check`
+7. `npm run validate`
+8. `npm run sitemap`
+9. Link checks (markdown + HTML, non-blocking)
+
+---
+
+## 11. Deployment Notes
+
+### Static Hosting (Vercel, Netlify, GitHub Pages, Cloudflare Pages)
+
+- **No build required** — `src/css/main.css` is committed
+- CI runs `npm run build:css` to verify
+- Service Worker at `/sw.js` (root scope) → works on all static hosts
+- Configure HTTPS (required for PWA/SW)
+- Optional: CSP headers (see `docs/ARCHITECTURE.md`)
+
+### Vercel Specific
+
+```json
+// vercel.json (if needed)
+{
+  "headers": [
+    { "source": "/sw.js", "headers": [{ "key": "Service-Worker-Allowed", "value": "/" }] },
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
 }
 ```
 
-### Event Handling
+---
 
-```javascript
-// Delegation for dynamic elements
-document.addEventListener('click', (e) => {
-  if (e.target.matches('.game-btn')) {
-    handleGameBtnClick(e.target);
-  }
-});
+## 12. Resources
 
-// Cleanup listeners
-function removeGameListeners() {
-  document.removeEventListener('click', handleGameBtnClick);
-}
-```
+- **Tailwind CSS**: https://tailwindcss.com/docs
+- **MDN Web Docs**: https://developer.mozilla.org/
+- **JavaScript Guide**: https://javascript.info/
+- **PWA Guide**: https://web.dev/progressive-web-apps/
+- **Project Docs**: `docs/ARCHITECTURE.md`, `docs/CONFIGURATION.md`, `README.md`
 
-## Resources
+---
 
-- [Tailwind CSS Docs](https://tailwindcss.com/docs)
-- [MDN Web Docs](https://developer.mozilla.org/)
-- [JavaScript.info](https://javascript.info/)
-- [Web.dev](https://web.dev/)
+## 13. Quick Reference Card
 
-## Getting Help
-
-- Check existing game implementations
-- Review the main index.html
-- Consult the utilities file
-- Open an issue on GitHub
+| Task           | Command / Pattern                                          |
+| -------------- | ---------------------------------------------------------- |
+| New game       | `mkdir -p games/x/assets/{css,js}` + copy template         |
+| Add to landing | Edit `public/data/games.json` + `npm run sitemap`          |
+| Validate all   | `npm run validate`                                         |
+| Full CI check  | `npm run check`                                            |
+| Random 1-6     | `window.RTUtils.getRandomNumber(1, 6)`                     |
+| Persist state  | `window.RTUtils.setLocalStorage('rtgaminghub-x', state)`   |
+| Load state     | `window.RTUtils.getLocalStorage('rtgaminghub-x', default)` |
+| Play win sound | `window.RTSound.win()`                                     |
+| Toggle sound   | `window.RTSound.toggle()`                                  |
+| CSS variables  | `--primary`, `--win`, `--lose`, `--bg-main`                |
+| Reduced motion | `@media (prefers-reduced-motion: reduce)`                  |
+| Focus visible  | `:focus-visible` (in main.css)                             |
 
 ---
 
 Happy game developing! 🎮
+
+For questions: check existing game implementations, consult `docs/ARCHITECTURE.md`, or open a GitHub issue.
