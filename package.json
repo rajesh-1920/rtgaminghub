@@ -1,12 +1,17 @@
 {
   "name": "rtgaminghub",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A web platform of various childhood games built with HTML5, Tailwind CSS, and Vanilla JavaScript",
   "main": "index.html",
   "scripts": {
-    "dev": "live-server",
-    "build:css": "npx tailwindcss -i ./src/css/input.css -o ./src/css/main.css",
-    "watch:css": "npx tailwindcss -i ./src/css/input.css -o ./src/css/main.css --watch"
+    "dev": "live-server --port=8000",
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css --minify",
+    "watch:css": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css --watch",
+    "lint:js": "eslint src games --ext .js",
+    "format": "prettier --write \"**/*.{html,js,css,json,md}\"",
+    "format:check": "prettier --check \"**/*.{html,js,css,json,md}\"",
+    "validate": "node scripts/validate.mjs",
+    "test": "npm run lint:js && npm run validate"
   },
   "keywords": [
     "games",
@@ -16,9 +21,12 @@
     "tailwind-css",
     "vanilla-js"
   ],
-  "author": "Your Name",
+  "author": "Rajesh Biswas",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^8.57.0",
+    "live-server": "^1.2.2",
+    "prettier": "^3.2.5",
     "tailwindcss": "^3.3.0"
   }
 }

@@ -114,7 +114,6 @@
 
   function setupThemeToggle() {
     const btn = document.getElementById('theme-toggle');
-    const root = document.documentElement;
     const KEY = 'rtgaminghub-theme';
     const apply = (theme) => {
       const dark = theme === 'dark';
@@ -125,12 +124,16 @@
       if (btn) btn.textContent = dark ? '☀️' : '🌙';
       try {
         localStorage.setItem(KEY, theme);
-      } catch (_) {}
+      } catch (err) {
+        if (err && window.console) console.warn('Theme persistence unavailable.');
+      }
     };
     let initial = 'light';
     try {
       initial = localStorage.getItem(KEY) || 'light';
-    } catch (_) {}
+    } catch (err) {
+      if (err && window.console) console.warn('Theme read unavailable.');
+    }
     apply(initial);
     if (btn) btn.addEventListener('click', () => {
       const isDark = document.body.classList.contains('dark');
