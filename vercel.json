@@ -1,4 +1,7 @@
 {
+  "buildCommand": "npm run build:css",
+  "outputDirectory": ".",
+  "framework": "static",
   "headers": [
     {
       "source": "/sw.js",
@@ -30,7 +33,7 @@
   ],
   "rewrites": [
     { "source": "/sw.js", "destination": "/sw.js" },
-    { "source": "/manifest.json", "destination": "/manifest.json" },
+    { "source": "/manifest.json", "destination": "/public/manifest.json" },
     { "source": "/offline.html", "destination": "/offline.html" },
     { "source": "/404.html", "destination": "/404.html" },
     { "source": "/favicon.ico", "destination": "/favicon.ico" },
@@ -41,5 +44,7 @@
     { "source": "/src/(.*)", "destination": "/src/$1" },
     { "source": "/games/(.*)", "destination": "/games/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
