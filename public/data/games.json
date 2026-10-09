@@ -9,7 +9,7 @@
       "category": "strategy",
       "players": "2",
       "difficulty": "Easy",
-      "image": "/public/images/tic-tac-toe.webp"
+      "image": "./public/images/tic-tac-toe.webp"
     },
     {
       "id": "rock-paper-scissors",
@@ -20,7 +20,7 @@
       "category": "chance",
       "players": "1",
       "difficulty": "Easy",
-      "image": "/public/images/rock-paper-scissors.webp"
+      "image": "./public/images/rock-paper-scissors.webp"
     },
     {
       "id": "bat-ball-stump",
@@ -31,7 +31,7 @@
       "category": "action",
       "players": "1",
       "difficulty": "Medium",
-      "image": "/public/images/bat-ball-stump.webp"
+      "image": "./public/images/bat-ball-stump.webp"
     }
   ]
 }

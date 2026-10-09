@@ -58,3 +58,21 @@
     animation: fadeInUp 0.6s ease-out;
   }
 }
+
+/* Accessibility: focus + reduced motion */
+:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
