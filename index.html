@@ -287,6 +287,14 @@
     </footer>
 
     <!-- Main JavaScript -->
+    <script src="./src/js/sound.js"></script>
     <script src="./src/js/main.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./public/sw.js').catch(() => {});
+        });
+      }
+    </script>
 </body>
 </html>

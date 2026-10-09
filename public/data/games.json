@@ -32,6 +32,28 @@
       "players": "1",
       "difficulty": "Medium",
       "image": "./public/images/bat-ball-stump.webp"
+    },
+    {
+      "id": "memory-match",
+      "name": "Memory Match",
+      "description": "Flip cards and find all 6 pairs in as few moves as possible!",
+      "path": "./games/memory-match/home.html",
+      "icon": "🧠",
+      "category": "puzzle",
+      "players": "1",
+      "difficulty": "Easy",
+      "image": "./public/images/memory-match.webp"
+    },
+    {
+      "id": "number-guess",
+      "name": "Number Guess",
+      "description": "Guess the secret number 1-100 in 7 tries. Hot or cold?",
+      "path": "./games/number-guess/home.html",
+      "icon": "🔢",
+      "category": "puzzle",
+      "players": "1",
+      "difficulty": "Easy",
+      "image": "./public/images/number-guess.webp"
     }
   ]
 }
