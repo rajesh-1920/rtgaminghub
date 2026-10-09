@@ -4,7 +4,7 @@ Thank you for your interest in contributing to RTGamingHub! We welcome contribut
 
 ## Code of Conduct
 
-Please be respectful and inclusive in all interactions. We're committed to providing a welcoming and harassment-free experience.
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to rajeshbiswas@example.com.
 
 ## How to Contribute
 

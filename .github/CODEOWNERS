@@ -1,0 +1,21 @@
+# These owners will be requested for review when someone opens a pull request.
+* @yourusername
+
+# Games
+/games/ @yourusername
+
+# Core
+/src/ @yourusername
+/public/ @yourusername
+
+# Docs
+/docs/ @yourusername
+README.md @yourusername
+CONTRIBUTING.md @yourusername
+CODE_OF_CONDUCT.md @yourusername
+SECURITY.md @yourusername
+
+# CI / Config
+/.github/ @yourusername
+/package.json @yourusername
+/tailwind.config.js @yourusername
