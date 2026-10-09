@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="RTGamingHub - Play classic childhood games online. Includes Tic Tac Toe, Rock Paper Scissors, and more!" />
     <meta name="theme-color" content="#3b82f6" />
+    <meta property="og:title" content="RTGamingHub - Classic Games Platform" />
+    <meta property="og:description" content="Play classic childhood games online. Free, no ads, no registration." />
+    <meta property="og:type" content="website" />
+    <link rel="manifest" href="./public/manifest.json" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
     <title>RTGamingHub - Classic Games Platform</title>
     
     <!-- Tailwind CSS CDN -->
@@ -23,8 +28,9 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-slate-100">
+    <a href="#games" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:px-4 focus:py-2 focus:rounded">Skip to games</a>
     <!-- Navigation Header -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="bg-white shadow-md sticky top-0 z-50" aria-label="Main navigation">
         <div class="container-lg">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-2">
@@ -32,10 +38,11 @@
                         🎮 RTGamingHub
                     </span>
                 </div>
-                <div class="hidden md:flex space-x-6">
+                <div class="hidden md:flex space-x-6 items-center">
                     <a href="#games" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Games</a>
                     <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
                     <a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                    <button id="theme-toggle" type="button" class="ml-2 px-3 py-2 border rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100" aria-label="Toggle dark mode">🌙</button>
                 </div>
             </div>
         </div>
@@ -83,7 +90,13 @@
                 Our Games Collection
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="max-w-xl mx-auto mb-10 flex gap-3">
+                <label for="game-search" class="sr-only">Search games</label>
+                <input id="game-search" type="search" placeholder="Search games… (try 'strategy' or 'easy')" class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600" autocomplete="off" />
+            </div>
+            <p id="game-empty" class="hidden text-center text-gray-500 mb-8">No games match your search.</p>
+
+            <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Tic Tac Toe Card -->
                 <a href="./games/tic-tac-toe/home.html" class="game-card group" data-game-link="./games/tic-tac-toe/home.html">
                     <div class="relative h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center overflow-hidden">
@@ -267,7 +280,7 @@
                     Built with ❤️ using HTML5, Tailwind CSS, and Vanilla JavaScript
                 </p>
                 <p>
-                    &copy; 2024 RTGamingHub. All rights reserved. | Made by Rajesh Biswas
+                    &copy; <span data-year>2026</span> RTGamingHub. All rights reserved. | Made by Rajesh Biswas
                 </p>
             </div>
         </div>
