@@ -194,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function resetGame() {
+		clearHistorySilent();
 		state.playerScore = 0;
 		state.computerScore = 0;
 		state.drawScore = 0;
@@ -211,6 +212,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		saveState();
 	}
 
+	function clearHistorySilent() {
+		state.history = [];
+		renderHistory();
+	}
+
 	function clearHistory() {
 		state.history = [];
 		renderHistory();
@@ -225,9 +231,27 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
-		state.history.slice(0, 12).forEach((h, idx) => {
+		state.history.slice(0, 12).forEach((h) => {
 			const li = document.createElement('li');
-			li.innerHTML = `<div style="display:flex;align-items:center;gap:8px"><div class="history-badge">#${h.round}</div><div><div><strong>${formatChoice(h.player)}</strong> vs <span class="muted">${formatChoice(h.computer)}</span></div><div class=\"history-meta\">${h.outcome}</div></div></div>`;
+			const wrap = document.createElement('div');
+			wrap.className = 'history-row';
+			const badge = document.createElement('div');
+			badge.className = 'history-badge';
+			badge.textContent = '#' + h.round;
+			const body = document.createElement('div');
+			const line1 = document.createElement('div');
+			const strong = document.createElement('strong');
+			strong.textContent = formatChoice(h.player);
+			const span = document.createElement('span');
+			span.className = 'muted';
+			span.textContent = formatChoice(h.computer);
+			line1.append(strong, document.createTextNode(' vs '), span);
+			const meta = document.createElement('div');
+			meta.className = 'history-meta';
+			meta.textContent = h.outcome;
+			body.append(line1, meta);
+			wrap.append(badge, body);
+			li.appendChild(wrap);
 			elements.recentList.appendChild(li);
 		});
 	}
