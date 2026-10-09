@@ -1,239 +1,317 @@
-# RTGamingHub - New Project Structure
+# RTGamingHub - Project Structure (v1.2.0)
 
-## Welcome! 👋
-
-Your project has been **professionally redesigned** with a modern folder structure. Here's what changed:
-
----
-
-## 🆕 New Structure Overview
+## Current Structure Overview
 
 ```
 rtgaminghub/
 │
 ├── 📄 Root Files (Main Entry Points)
-│   ├── index.html              ← New professional landing page
-│   ├── package.json            ← Project configuration
+│   ├── index.html              ← Landing page (dynamic, SEO, PWA)
+│   ├── 404.html                ← Not found page
+│   ├── offline.html            ← PWA offline fallback
+│   ├── robots.txt              ← Crawl control
+│   ├── package.json            ← Project configuration (v1.2.0)
 │   ├── tailwind.config.js      ← Tailwind CSS setup
-│   ├── README.md               ← Updated documentation
+│   ├── .nvmrc                  ← Node version (20)
+│   ├── .editorconfig           ← Editor settings
+│   ├── .gitignore              ← Git ignore rules
+│   ├── .gitattributes          ← Git attributes
+│   ├── .prettierignore         ← Prettier ignore
+│   ├── .eslintignore           ← ESLint ignore
+│   ├── .stylelintrc.json       ← Stylelint config
+│   ├── .eslintrc.json          ← ESLint config
+│   ├── README.md               ← Full documentation
+│   ├── CHANGELOG.md            ← Version history
 │   ├── LICENSE                 ← MIT License
 │   ├── CONTRIBUTING.md         ← Contribution guidelines
-│   └── .gitignore              ← Git ignore rules
+│   ├── CODE_OF_CONDUCT.md      ← Contributor Covenant
+│   ├── SECURITY.md             ← Security policy
+│   └── .git/                   ← Git repository
 │
-├── 📁 src/                     ← NEW: Source code
+├── 📁 src/                     ← Source code
 │   ├── css/
-│   │   ├── input.css           ← NEW: Tailwind input
-│   │   └── main.css            ← NEW: Generated CSS
+│   │   ├── input.css           ← Tailwind input (source)
+│   │   └── main.css            ← Generated CSS (built, minified, committed)
 │   └── js/
-│       ├── main.js             ← NEW: Main app logic
+│       ├── main.js             ← Main app (grid, search, theme, SW)
+│       ├── sound.js            ← WebAudio sound utility
 │       └── utils/
-│           └── helpers.js      ← NEW: Utility functions
+│           └── helpers.js      ← Shared utilities (ES module + global fallback)
 │
-├── 📁 games/                   ← NEW: All games organized
-│   ├── tic-tac-toe/            ← (Your existing game - moved)
-│   ├── rock-paper-scissors/    ← (Your existing game - moved)
-│   └── bat-ball-stump/         ← (Your existing game - moved)
+├── 📁 games/                   ← All games organized (5 games)
+│   ├── tic-tac-toe/
+│   │   ├── home.html
+│   │   ├── assets/
+│   │   │   ├── css/home.css
+│   │   │   └── js/home.js
+│   │   └── README.md
+│   ├── rock-paper-scissors/
+│   │   ├── home.html
+│   │   ├── assets/
+│   │   │   ├── css/home.css
+│   │   │   ├── js/home.js
+│   │   │   └── image/ (rock.jpeg, paper.jpeg, scissors.jpeg)
+│   │   └── README.md
+│   ├── bat-ball-stump/
+│   │   ├── home.html
+│   │   ├── assets/
+│   │   │   ├── css/home.css
+│   │   │   └── js/home.js
+│   │   └── README.md
+│   ├── memory-match/
+│   │   ├── home.html
+│   │   ├── assets/
+│   │   │   ├── css/home.css
+│   │   │   └── js/home.js
+│   │   └── README.md
+│   └── number-guess/
+│       ├── home.html
+│       ├── assets/
+│       │   ├── css/home.css
+│       │   │   └── js/home.js
+│       └── README.md
 │
-├── 📁 public/                  ← NEW: Public assets
-│   ├── images/
+├── 📁 public/                  ← Public assets (served as-is)
+│   ├── images/                 ← Game thumbnails (WebP)
 │   │   ├── tic-tac-toe.webp
 │   │   ├── rock-paper-scissors.webp
-│   │   └── bat-ball-stump.webp
+│   │   ├── bat-ball-stump.webp
+│   │   ├── memory-match.webp
+│   │   └── number-guess.webp
+│   ├── favicon.svg             ← App icon (SVG)
+│   ├── manifest.json           ← PWA manifest (shortcuts, categories)
+│   ├── sitemap.xml             ← SEO sitemap (generated)
+│   ├── sw.js                   ← Service Worker (copy to root on deploy)
 │   └── data/
-│       └── games.json          ← NEW: Games configuration
+│       └── games.json          ← Games metadata (5 games)
 │
-├── 📁 docs/                    ← NEW: Documentation
-│   ├── QUICK_START.md          ← Get started quickly
-│   ├── GAME_DEVELOPMENT.md     ← Developer guide
-│   └── CONFIGURATION.md        ← Configuration reference
+├── 📁 scripts/                 ← Build/validation scripts
+│   ├── validate.mjs            ← Repo validator (CI gate)
+│   └── sitemap.mjs             ← Sitemap generator
 │
-└── 📁 assets/                  ← OLD: Kept for reference
-    ├── css/
-    └── image/
+├── 📁 .github/                 ← GitHub automation
+│   ├── workflows/ci.yml        ← CI pipeline
+│   ├── ISSUE_TEMPLATE/         ← Bug/feature templates
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── CODEOWNERS
+│
+└── 📁 docs/                    ← Documentation
+    ├── QUICK_START.md          ← Get started quickly
+    ├── GAME_DEVELOPMENT.md     ← Developer guide
+    ├── CONFIGURATION.md        ← Configuration reference
+    ├── ARCHITECTURE.md         ← System architecture
+    ├── REDESIGN_SUMMARY.md     ← Redesign notes (historical)
+    └── PROJECT_STRUCTURE.md    ← This file
 ```
 
 ---
 
-## 📊 What Changed?
+## What Changed (v1.1.0 → v1.2.0)
 
-### ✅ Added (New Professional Structure)
+### ✅ Added
 
-| Item | Purpose |
-|------|---------|
-| `src/` | Centralized source code |
-| `public/` | Public assets organization |
-| `games/` | Organized game folder |
-| `docs/` | Comprehensive documentation |
-| `package.json` | NPM configuration |
-| `tailwind.config.js` | CSS customization |
-| `CONTRIBUTING.md` | Contribution guidelines |
-| `LICENSE` | MIT License |
+| Item                               | Purpose                                                                 |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| `scripts/validate.mjs`             | Repo validator (files, games.json, images, READMEs, manifest, sitemap)  |
+| `scripts/sitemap.mjs`              | Auto-generates `public/sitemap.xml` from `games.json`                   |
+| `public/sitemap.xml`               | SEO sitemap (7 URLs)                                                    |
+| `robots.txt`                       | Crawl control + sitemap pointer                                         |
+| `404.html`                         | Branded not-found page                                                  |
+| `offline.html`                     | PWA offline fallback                                                    |
+| `public/favicon.svg`               | SVG app icon                                                            |
+| `public/manifest.json`             | Expanded: shortcuts (5 games), categories, maskable icons               |
+| `sw.js` (root)                     | Service Worker v2 (correct scope, offline fallback)                     |
+| `.github/workflows/ci.yml`         | Hardened CI (permissions, cache, concurrency, full pipeline)            |
+| `.github/ISSUE_TEMPLATE/`          | Bug report, feature request, config                                     |
+| `.github/PULL_REQUEST_TEMPLATE.md` | PR checklist                                                            |
+| `.github/CODEOWNERS`               | Review routing                                                          |
+| `SECURITY.md`                      | Security policy + disclosure                                            |
+| `CODE_OF_CONDUCT.md`               | Contributor Covenant 2.1                                                |
+| Memory Match game                  | `games/memory-match/` (6 pairs, best score)                             |
+| Number Guess game                  | `games/number-guess/` (1-100, 7 tries, win counter)                     |
+| Per-game READMEs                   | 4 new (bat-ball-stump, memory-match, number-guess, rock-paper-scissors) |
 
-### 🔄 Moved (But Unchanged)
+### 🔄 Updated
 
-Your game folders have been moved to `/games/`:
-- ✅ `bat-ball-stump/` → `games/bat-ball-stump/` (No changes)
-- ✅ `rock-paper-scissors/` → `games/rock-paper-scissors/` (No changes)
-- ✅ `tic-tac-toe/` → `games/tic-tac-toe/` (No changes)
+| Item                      | Change                                                                                       |
+| ------------------------- | -------------------------------------------------------------------------------------------- |
+| `index.html`              | Dynamic game grid, search filter, theme toggle, 5-game hero/footer, SW registration, OG tags |
+| `games.json`              | 5 games (added memory-match, number-guess)                                                   |
+| `public/manifest.json`    | Shortcuts, scope, display_override, categories, SVG icons                                    |
+| `tailwind.config.js`      | Extended content paths + safelist                                                            |
+| `src/js/main.js`          | Dynamic grid, search, theme, SW register                                                     |
+| `src/js/utils/helpers.js` | ES module + global fallback, validation, pickRandom, locale formatScore                      |
+| `src/js/sound.js`         | WebAudio utility (win/lose/draw/click/toggle)                                                |
+| `src/css/input.css`       | fade-in-up keyframe, focus-visible, reduced-motion                                           |
+| `docs/CONFIGURATION.md`   | Fully rewritten (current scripts, files, CI, checklist)                                      |
+| `README.md`               | Fully rewritten (5 games, full docs, commands)                                               |
+| `CHANGELOG.md`            | v1.2.0 entry added                                                                           |
+| `docs/ARCHITECTURE.md`    | Fully rewritten (5 games, current stack, PWA, security, deployment)                          |
+| `package.json`            | v1.2.0, engines node>=20, new scripts                                                        |
 
-**All game code remains untouched!**
+### 🗑️ Removed
 
-### 🎨 Redesigned
-
-- **Landing Page** (`index.html`) - Modern, professional design with Tailwind CSS
-- **README.md** - Better documentation and structure
-- **CSS** - Transitioned to Tailwind CSS for better maintainability
-
-### 🏚️ Old Files (Still Present)
-
-- `assets/css/` - Kept for reference (old CSS)
-- `assets/image/` - Kept for reference (old images)
-
----
-
-## 🚀 Next Steps
-
-### 1. **Update Game Links** (Optional but Recommended)
-Your landing page now has proper links to all games. No action needed!
-
-### 2. **Delete Old Assets** (Optional)
-If you want to clean up, you can delete the old `assets/` folder:
-```bash
-rm -rf assets/
-```
-
-### 3. **Start Developing!**
-- Edit `/index.html` for the landing page
-- Edit games in `/games/[game-name]/`
-- Add new games to `/games/`
-- Update `/public/data/games.json` for new games
+| Item             | Reason                                               |
+| ---------------- | ---------------------------------------------------- |
+| `assets/` folder | Legacy duplicate of `public/images/`, typo filenames |
+| Tailwind CDN     | `index.html` now uses built `src/css/main.css` only  |
+| `public/sw.js`   | Moved to root `sw.js` for correct PWA scope          |
 
 ---
 
-## 📖 Documentation Files
-
-New comprehensive guides have been created:
-
-- **[QUICK_START.md](docs/QUICK_START.md)** ⚡
-  - Get started in 2 minutes
-  - Basic commands
-  - Troubleshooting
-
-- **[GAME_DEVELOPMENT.md](docs/GAME_DEVELOPMENT.md)** 🎮
-  - How to create games
-  - Best practices
-  - Styling guide
-
-- **[CONFIGURATION.md](docs/CONFIGURATION.md)** ⚙️
-  - File configuration reference
-  - Customization examples
-  - Build process explanation
-
----
-
-## 🎯 Key Features of New Structure
+## Key Features of Current Structure
 
 ✅ **Professional Organization**
-- Separated concerns (src, public, docs)
+
+- Separated concerns (src, public, games, scripts, docs)
 - Clear directory hierarchy
 - Easy to scale
 
-✅ **Better Maintainability**
-- Centralized configuration
-- Reusable utilities
-- Consistent styling
+✅ **Zero-Build Deploy**
 
-✅ **Improved Documentation**
-- Quick start guide
-- Developer guide
-- Configuration reference
+- `src/css/main.css` committed (minified)
+- Works on any static host without build step
+- CI verifies build anyway
 
-✅ **Modern Tooling**
-- npm scripts
-- Tailwind CSS setup
-- Build process ready
+✅ **PWA Ready**
 
-✅ **Games Preserved**
-- All game code unchanged
-- Same functionality
-- Just reorganized location
+- Manifest + Service Worker (root scope)
+- Offline fallback + shortcuts
+- Installable on mobile/desktop
+
+✅ **Quality Gates**
+
+- ESLint + Stylelint + Prettier
+- Custom validator (`scripts/validate.mjs`)
+- GitHub Actions CI (lint + format + validate + sitemap)
+- Node --check on all JS
+
+✅ **Developer Experience**
+
+- `.editorconfig` + `.nvmrc` (Node 20)
+- `.gitignore` + `.gitattributes` + `.prettierignore` + `.eslintignore`
+- `npm run check` runs full pipeline
+- `npm run sitemap` auto-updates SEO
+
+✅ **Games Preserved & Enhanced**
+
+- All 3 original games refactored (a11y, persistence, bugs fixed)
+- 2 new games added (Memory Match, Number Guess)
+- Consistent structure: `home.html` + `assets/css/home.css` + `assets/js/home.js` + `README.md`
+- OG tags + canonical URLs on all game pages
 
 ---
 
-## 🔗 File Location Reference
+## File Location Reference
 
-| Need | Location |
-|------|----------|
-| Edit landing page | `index.html` |
-| Edit Tic Tac Toe | `games/tic-tac-toe/home.html` |
+| Need                     | Location                              |
+| ------------------------ | ------------------------------------- |
+| Edit landing page        | `index.html`                          |
+| Edit Tic Tac Toe         | `games/tic-tac-toe/home.html`         |
 | Edit Rock Paper Scissors | `games/rock-paper-scissors/home.html` |
-| Edit Bat Ball Stump | `games/bat-ball-stump/home.html` |
-| Add utilities | `src/js/utils/helpers.js` |
-| Configure Tailwind | `tailwind.config.js` |
-| Add games list | `public/data/games.json` |
-| Quick help | `docs/QUICK_START.md` |
+| Edit Bat Ball Stump      | `games/bat-ball-stump/home.html`      |
+| Edit Memory Match        | `games/memory-match/home.html`        |
+| Edit Number Guess        | `games/number-guess/home.html`        |
+| Add utilities            | `src/js/utils/helpers.js`             |
+| Add sound effects        | `src/js/sound.js`                     |
+| Configure Tailwind       | `tailwind.config.js`                  |
+| Add games list           | `public/data/games.json`              |
+| Validate repo            | `npm run validate`                    |
+| Generate sitemap         | `npm run sitemap`                     |
+| Full quality check       | `npm run check`                       |
+| Quick help               | `docs/QUICK_START.md`                 |
 
 ---
 
-## ⚡ Quick Commands
+## Quick Commands
 
 ```bash
 # View project structure
 tree -L 3
 
-# Start local server
-python -m http.server 8000
+# Install dependencies (Node >=20)
+npm ci
 
-# Install dependencies
-npm install
+# Start local server (port 8000)
+npm run dev
 
-# Build CSS
+# Build & minify CSS
 npm run build:css
 
 # Watch CSS changes
 npm run watch:css
+
+# Lint JavaScript
+npm run lint:js
+
+# Lint CSS
+npm run lint:css
+
+# Auto-format
+npm run format
+
+# Check formatting
+npm run format:check
+
+# Validate everything
+npm run validate
+
+# Generate sitemap.xml
+npm run sitemap
+
+# Full CI pipeline (lint + format + validate)
+npm run check
+
+# Clean generated files
+npm run clean
 ```
 
 ---
 
-## 📚 Learning Resources
+## Learning Resources
 
-See the documentation files for:
-- How to create a new game
-- How to customize styles
-- How to add features
-- Best practices and tips
+See documentation files for:
 
----
-
-## ✨ Summary
-
-Your project is now:
-- 📁 Better organized
-- 🎨 More professional
-- 📖 Well documented
-- 🚀 Ready to scale
-- 🎮 All games preserved
-
-**All your existing games are unchanged and fully functional!**
+- How to create a new game → `docs/GAME_DEVELOPMENT.md`
+- How to customize styles → `docs/CONFIGURATION.md`
+- How to add features → `docs/ARCHITECTURE.md`
+- Build process & scripts → `docs/CONFIGURATION.md`
+- Best practices → `CONTRIBUTING.md`
 
 ---
 
-## 🎓 What to Do Now
+## Summary
 
-1. ✅ Review the new structure
-2. ✅ Open `docs/QUICK_START.md` for quick help
-3. ✅ Test the landing page
-4. ✅ Play the games (they work the same!)
-5. ✅ Read the development guides
-6. ✅ Start building new features!
+The project is now:
+
+- 📁 Better organized (src, public, games, scripts, docs, .github)
+- 🎨 Modern (Tailwind built, CSS variables, dark mode)
+- 📱 PWA-ready (manifest, SW, offline, shortcuts)
+- 📖 Well documented (5 doc files + per-game READMEs + root README)
+- 🛡️ Quality-gated (lint + format + validate + CI)
+- 🚀 Ready to scale (5 games, extensible structure)
+- 🎮 All games functional & enhanced
+
+**All 5 games are fully playable with persistent scores, sound, and offline support!**
+
+---
+
+## What to Do Now
+
+1. ✅ Review the structure
+2. ✅ Run `npm run check` (should pass)
+3. ✅ Run `npm run dev` and test all 5 games
+4. ✅ Test PWA: install, go offline, verify games work
+5. ✅ Deploy to Vercel/Netlify/GitHub Pages (static files only)
 
 ---
 
 Happy coding! 🎮
 
 For detailed documentation, see:
+
 - [Main README](../README.md)
 - [Quick Start](QUICK_START.md)
 - [Game Development](GAME_DEVELOPMENT.md)
 - [Configuration](CONFIGURATION.md)
+- [Architecture](ARCHITECTURE.md)

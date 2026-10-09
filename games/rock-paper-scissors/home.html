@@ -1,35 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Rock Paper Scissors — play against the computer on RTGamingHub."
+    />
+    <meta property="og:title" content="Rock Paper Scissors | RTGamingHub" />
+    <meta
+      property="og:description"
+      content="Timeless chance-based game. Play Rock, Paper, or Scissors against the computer."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#3b82f6" />
+    <title>Rock Paper Scissors | RTGamingHub</title>
+    <link
+      rel="canonical"
+      href="https://yourusername.github.io/rtgaminghub/games/rock-paper-scissors/home.html"
+    />
+    <link rel="stylesheet" href="./assets/css/home.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rock-paper-scissors</title>
-    <link rel="stylesheet" href="./assets/css/home.css">
-</head>
-
-<body>
+  <body>
+    <a class="back-link" href="../../index.html">← Back to Games</a>
     <!-- header section -->
     <header>
-        <h1>Rock Paper Scissors</h1>
+      <h1>Rock Paper Scissors</h1>
+      <p class="subtitle">Choose wisely — first to build a streak wins bragging rights</p>
     </header>
     <!-- main section -->
     <main>
-        <p>Welcome</p>
-        <div class="playground">
-            <div class="circle" id="rock"></div>
-            <div class="circle" id="paper"></div>
-            <div class="circle" id="scissors"></div>
-        </div>
-        <p class="result">Start</p>
-        <p>Your Score : <span id="your-score">0</span></p>
-        <p>Computer Score : <span id="computer-score">0</span></p>
+      <div class="playground" role="group" aria-label="Choose your move">
+        <button class="circle" id="rock" data-choice="rock" aria-label="Choose Rock">✊</button>
+        <button class="circle" id="paper" data-choice="paper" aria-label="Choose Paper">✋</button>
+        <button class="circle" id="scissors" data-choice="scissors" aria-label="Choose Scissors">
+          ✌️
+        </button>
+      </div>
+      <p class="result" role="status" aria-live="polite">Pick a move to start</p>
+      <div class="scores" aria-live="polite">
+        <p>Your Score: <span id="your-score">0</span></p>
+        <p>Draws: <span id="draw-score">0</span></p>
+        <p>Computer Score: <span id="computer-score">0</span></p>
+      </div>
+      <div class="controls">
+        <button id="reset-btn" type="button">Reset scores</button>
+      </div>
     </main>
     <!-- footer section -->
-    <footer>
-        @copyright all preserves Rajesh Biswas.
-    </footer>
+    <footer>© All rights reserved — Rajesh Biswas • RTGamingHub</footer>
+    <script src="../../src/js/utils/helpers.js" type="module"></script>
     <script src="./assets/js/home.js"></script>
-</body>
-
+  </body>
 </html>

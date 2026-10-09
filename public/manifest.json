@@ -1,0 +1,85 @@
+{
+  "name": "RTGamingHub - Classic Games Platform",
+  "short_name": "RTGamingHub",
+  "description": "Play classic childhood games online. Free, no ads.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "dir": "ltr",
+  "lang": "en",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tic Tac Toe",
+      "short_name": "Tic Tac Toe",
+      "description": "Classic 3x3 strategy game",
+      "url": "./games/tic-tac-toe/home.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Rock Paper Scissors",
+      "short_name": "Rock Paper Scissors",
+      "description": "Play against the computer",
+      "url": "./games/rock-paper-scissors/home.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✋</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Bat Ball Stump",
+      "short_name": "Bat Ball Stump",
+      "description": "Cricket-inspired action game",
+      "url": "./games/bat-ball-stump/home.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏏</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Memory Match",
+      "short_name": "Memory Match",
+      "description": "Find all 6 pairs",
+      "url": "./games/memory-match/home.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Number Guess",
+      "short_name": "Number Guess",
+      "description": "Guess the secret number 1-100",
+      "url": "./games/number-guess/home.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

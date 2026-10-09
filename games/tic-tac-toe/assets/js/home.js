@@ -1,7 +1,18 @@
-let boxes = document.querySelectorAll(".box");
-let btn = document.querySelectorAll(".reset-btn");
+(() => {
+  'use strict';
 
-let win_condition = [
+  const boxes = Array.from(document.querySelectorAll('.box'));
+  const resetButtons = Array.from(document.querySelectorAll('.reset-btn'));
+  const winPanel = document.querySelector('.result');
+  const msg = document.querySelector('#message');
+  const scoreLine = document.querySelector('#score-line');
+  const container = document.querySelector('.container');
+  const turnIndicator = document.querySelector('#turn-indicator');
+  const scoreXEl = document.querySelector('#score-x');
+  const scoreOEl = document.querySelector('#score-o');
+  const scoreDrawEl = document.querySelector('#score-draw');
+
+  const WIN_CONDITIONS = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -9,78 +20,129 @@ let win_condition = [
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6]
-];
+    [2, 4, 6],
+  ];
 
-let current = "o";
+  const STORAGE_KEY = 'rtgaminghub-tic-tac-toe';
+  const scores = loadScores();
+  let current = 'O';
+  let gameOver = false;
 
-for (let box of boxes) {
-    box.onclick = () => {
-        if (current === "o") {
-            box.style.color = "green";
-            box.innerText = "O";
-            current = "x";
-        }
-        else {
-            box.style.color = "red";
-            box.innerText = "X";
-            current = "o";
-        }
-        box.disabled = true;
-        check();
+  paintScores();
+  updateTurn();
+
+  boxes.forEach((box, idx) => {
+    box.addEventListener('click', () => handleMove(box, idx));
+  });
+
+  resetButtons.forEach((btn) => {
+    btn.addEventListener('click', resetBoard);
+  });
+
+  function handleMove(box, idx) {
+    if (gameOver || box.disabled || box.textContent !== '') return;
+    box.textContent = current;
+    box.classList.add(current === 'X' ? 'box-x' : 'box-o');
+    box.setAttribute('aria-label', `Cell ${idx + 1}, ${current}`);
+    box.disabled = true;
+    const winner = checkWinner();
+    if (winner) {
+      endGame(`Congratulations! ${winner} is the winner`, winner);
+      return;
     }
-}
+    if (isDraw()) {
+      endGame('Match draw — please play again', 'draw');
+      return;
+    }
+    current = current === 'O' ? 'X' : 'O';
+    updateTurn();
+  }
 
-let win = document.querySelector(".result");
-let msg = document.querySelector("#message");
-let container = document.querySelector(".container");
+  function checkWinner() {
+    for (const [a, b, c] of WIN_CONDITIONS) {
+      const v0 = boxes[a].textContent;
+      if (v0 !== '' && v0 === boxes[b].textContent && v0 === boxes[c].textContent) {
+        return v0;
+      }
+    }
+    return null;
+  }
 
-for (let bt of btn) {
-    bt.onclick = () => {
-        current = "o";
-        for (let box of boxes) {
-            box.innerText = "";
-            box.disabled = false;
-            win.classList.remove("result");
-            win.classList.add("hide");
-            msg.innerText = "";
-            container.classList.remove("cohide");
-            container.classList.add("container");
+  function isDraw() {
+    return boxes.every((b) => b.textContent !== '');
+  }
+
+  function endGame(message, result) {
+    gameOver = true;
+    if (result === 'X') scores.x += 1;
+    else if (result === 'O') scores.o += 1;
+    else scores.draws += 1;
+    saveScores();
+    paintScores();
+    msg.textContent = message;
+    if (scoreLine) {
+      scoreLine.textContent = `X ${scores.x} • Draws ${scores.draws} • O ${scores.o}`;
+    }
+    winPanel.classList.remove('hide');
+    if (container) container.style.display = 'none';
+  }
+
+  function resetBoard() {
+    current = 'O';
+    gameOver = false;
+    boxes.forEach((box, idx) => {
+      box.textContent = '';
+      box.disabled = false;
+      box.classList.remove('box-x', 'box-o');
+      box.setAttribute('aria-label', `Cell ${idx + 1}`);
+    });
+    if (msg) msg.textContent = '';
+    if (winPanel) winPanel.classList.add('hide');
+    if (container) container.style.display = '';
+    updateTurn();
+  }
+
+  function updateTurn() {
+    if (turnIndicator) turnIndicator.textContent = gameOver ? 'Game over' : `${current} to move`;
+  }
+
+  function paintScores() {
+    if (scoreXEl) scoreXEl.textContent = String(scores.x);
+    if (scoreOEl) scoreOEl.textContent = String(scores.o);
+    if (scoreDrawEl) scoreDrawEl.textContent = String(scores.draws);
+  }
+
+  function loadScores() {
+    try {
+      if (window.RTUtils) {
+        const saved = window.RTUtils.getLocalStorage(STORAGE_KEY, null);
+        if (saved && typeof saved === 'object') {
+          return { x: num(saved.x), o: num(saved.o), draws: num(saved.draws) };
         }
-    }
-}
-//let count = 0;
-const check = () => {
-    let flag = 1;
-    for (let arr of win_condition) {
-        let val0 = boxes[arr[0]].innerText
-        let val1 = boxes[arr[1]].innerText
-        let val2 = boxes[arr[2]].innerText;
-        if (val0 != "" && val1 != "" && val2 != "") {
-            if (val0 == val1 && val0 == val2) {
-                flag = 0;
-                win.classList.add("result");
-                win.classList.remove("hide");
-                msg.innerText = "congratulations " + (val0) + " you are the winer";
-                container.classList.add("cohide");
-                container.classList.remove("container");
-            }
+      } else {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const s = JSON.parse(raw);
+          return { x: num(s.x), o: num(s.o), draws: num(s.draws) };
         }
+      }
+    } catch (e) {
+      console.error('Unable to load scores', e);
     }
-    let count = 0;
-    for (let box of boxes) {
-        if (box.innerText != "") {
-            count++;
-        }
-    }
-    //console.log(count);
-    if (count == 9 && flag == 1) {
-        win.classList.add("result");
-        win.classList.remove("hide");
-        msg.innerText = "Match draw please play again";
-        container.classList.add("cohide");
-        container.classList.remove("container");
-    }
-}
+    return { x: 0, o: 0, draws: 0 };
+  }
 
+  function saveScores() {
+    try {
+      if (window.RTUtils) window.RTUtils.setLocalStorage(STORAGE_KEY, scores);
+      else localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+    } catch (e) {
+      console.error('Unable to save scores', e);
+    }
+  }
 
+  function num(v) {
+    const n = Number(v);
+    return Number.isFinite(n) && n >= 0 ? Math.floor(n) : 0;
+  }
+})();

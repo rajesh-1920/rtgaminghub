@@ -3,30 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tic-tac-toe</title>
+    <meta
+      name="description"
+      content="Tic Tac Toe — the classic 3x3 strategy game. Play with a friend on RTGamingHub."
+    />
+    <meta property="og:title" content="Tic Tac Toe | RTGamingHub" />
+    <meta
+      property="og:description"
+      content="Classic 3x3 strategy game. Two players, take turns, three in a row wins."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#3b82f6" />
+    <title>Tic Tac Toe | RTGamingHub</title>
+    <link
+      rel="canonical"
+      href="https://yourusername.github.io/rtgaminghub/games/tic-tac-toe/home.html"
+    />
     <link rel="stylesheet" href="./assets/css/home.css" />
   </head>
 
   <body>
-    <div class="result hide">
+    <a class="back-link" href="../../index.html">← Back to Games</a>
+
+    <div class="result hide" role="status" aria-live="polite">
       <h1 id="message"></h1>
-      <button class="reset-btn">New game</button>
+      <p id="score-line" class="score-line" aria-live="polite"></p>
+      <button class="reset-btn" type="button">New game</button>
     </div>
-    <div class="container cohide">
+
+    <main class="container">
       <h1 id="tic">Tic Tac Toe</h1>
-      <div class="boxes">
-        <button class="box"></button>
-        <button class="box"></button>
-        <button class="box"></button>
-        <button class="box"></button>
-        <button class="box"></button>
-        <button class="box"></button>
-        <button class="box"></button>
-        <button class="box"></button>
-        <button class="box"></button>
+      <p class="subtitle">Two players • Take turns • Three in a row wins</p>
+      <div class="scoreboard" aria-live="polite">
+        <div>X wins: <span id="score-x">0</span></div>
+        <div>Draws: <span id="score-draw">0</span></div>
+        <div>O wins: <span id="score-o">0</span></div>
       </div>
-      <button class="reset-btn">Reset game</button>
-    </div>
+      <div class="boxes" role="grid" aria-label="Tic Tac Toe board">
+        <button class="box" type="button" aria-label="Cell 1"></button>
+        <button class="box" type="button" aria-label="Cell 2"></button>
+        <button class="box" type="button" aria-label="Cell 3"></button>
+        <button class="box" type="button" aria-label="Cell 4"></button>
+        <button class="box" type="button" aria-label="Cell 5"></button>
+        <button class="box" type="button" aria-label="Cell 6"></button>
+        <button class="box" type="button" aria-label="Cell 7"></button>
+        <button class="box" type="button" aria-label="Cell 8"></button>
+        <button class="box" type="button" aria-label="Cell 9"></button>
+      </div>
+      <div class="controls">
+        <button class="reset-btn" type="button">Reset game</button>
+      </div>
+      <p class="turn" id="turn-indicator" aria-live="polite">O goes first</p>
+    </main>
     <script src="./assets/js/home.js"></script>
   </body>
 </html>
