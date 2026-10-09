@@ -1,0 +1,15 @@
+* text=auto eol=lf
+*.js text diff=javascript
+*.css text diff=css
+*.html text diff=html
+*.json text
+*.md text
+*.yml text
+*.yaml text
+*.webp binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+node_modules/ export-ignore
+dist/ export-ignore
+build/ export-ignore

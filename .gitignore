@@ -1,7 +1,34 @@
+# Dependencies
 node_modules/
-.DS_Store
+
+# Env
 .env
+.env.*
+*.local
+
+# Build output
 dist/
 build/
-*.log
+.coverage/
 coverage/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Test / reports
+playwright-report/
+test-results/
+
+# NOTE: src/css/main.css is a committed build artifact (built via `npm run build:css`).
+# We intentionally do NOT ignore it so Pages/static hosting works without a build step.

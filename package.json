@@ -1,17 +1,22 @@
 {
   "name": "rtgaminghub",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A web platform of various childhood games built with HTML5, Tailwind CSS, and Vanilla JavaScript",
   "main": "index.html",
   "scripts": {
     "dev": "live-server --port=8000",
+    "start": "npm run dev",
     "build:css": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css --minify",
     "watch:css": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css --watch",
-    "lint:js": "eslint src games --ext .js",
+    "lint:js": "eslint src games scripts public/sw.js tailwind.config.js --ext .js,.mjs",
+    "lint:css": "stylelint src/css/input.css",
     "format": "prettier --write \"**/*.{html,js,css,json,md}\"",
     "format:check": "prettier --check \"**/*.{html,js,css,json,md}\"",
     "validate": "node scripts/validate.mjs",
-    "test": "npm run lint:js && npm run validate"
+    "sitemap": "node scripts/sitemap.mjs",
+    "check": "npm run lint:js && npm run lint:css && npm run format:check && npm run validate",
+    "test": "npm run check",
+    "clean": "rm -rf node_modules package-lock.json dist build .cache coverage *.log"
   },
   "keywords": [
     "games",
@@ -23,10 +28,15 @@
   ],
   "author": "Rajesh Biswas",
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "eslint": "^8.57.0",
     "live-server": "^1.2.2",
     "prettier": "^3.2.5",
+    "stylelint": "^16.2.0",
+    "stylelint-config-standard": "^36.0.0",
     "tailwindcss": "^3.3.0"
   }
 }
